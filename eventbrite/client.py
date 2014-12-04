@@ -6,7 +6,7 @@ import requests
 from .models import Payload
 from .exceptions import IllegalHttpMethod
 from .utils import format_path
-
+import _version
 
 class Eventbrite(object):
 
@@ -15,15 +15,13 @@ class Eventbrite(object):
     def __init__(self, oauth_token):
         self.oauth_token = oauth_token
 
-
     @property
     def headers(self):
         return {
-            "agent": "eventbrite-python-sdk 0.1.0",
+            "agent": "eventbrite-python-sdk {version}".format(version=_version.__version__),
             "Authorization": "Bearer {0}".format(self.oauth_token),
             "content-type": "application/json"
         }
-
 
     def api(self, method, path, data, expansions=()):
         method = method.strip().lower()
@@ -36,16 +34,13 @@ class Eventbrite(object):
         path = format_path(path)
         return method(path, data)
 
-
     def get(self, path, data, expansions=()):
         response = requests.get(path, headers=self.headers, params=data)
         return Payload.create(response)
 
-
     def post(self, path, data, expansions=()):
         response = requests.post(path, headers=self.headers, data=data)
         return Payload.create(response)
-
 
     def delete(self, path, data, expansions=()):
         response = requests.delete(path, headers=self.headers, data=data)
