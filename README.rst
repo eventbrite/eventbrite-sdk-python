@@ -14,7 +14,7 @@ eventbrite-sdk-python
 
 Official Eventbrite SDK for Python
 
-* Free software: BSD license
+* Free software: Apache 2 license
 * Documentation: https://eventbrite.readthedocs.org.
 
 Usage
