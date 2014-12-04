@@ -12,7 +12,7 @@ from eventbrite import Eventbrite
 from ..base import unittest
 
 try:
-    oauth_token = os.environ.get(u'OAUTH_TOKEN')
+    oauth_token = os.environ[u'OAUTH_TOKEN']
     skip_integration_tests = False
 except KeyError:
     skip_integration_tests = True
