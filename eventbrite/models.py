@@ -3,6 +3,13 @@ import pprint
 
 
 class Payload(dict):
+    """The object returned from the low-level client calls:
+
+        * .api()
+        * .get()
+        * .post()
+        * .delete()
+    """
 
     @classmethod
     def create(cls, response):
@@ -20,11 +27,28 @@ class Payload(dict):
         return pprint.pformat(self)
 
 
+    def objectify(self):
+        """Returns an EventbriteObject representation of the Payload"""
+        pass
 
 
-class EventbriteObject(object):
+class EventbriteObject(Payload):
 
-    list = False
+    list = None
+    pagination = None
     payload = {}
     type = ""
     id = pk = None
+
+    @classmethod
+    def create_from_payload(cls, payload):
+        evbobject = cls(payload)
+        evbobject.url = payload.url
+        evbobject.ok = payload.ok
+        evbobject.elapsed = payload.elapsed
+        evbobject.headers = payload.headers
+        evbobject.reason = payload.reason
+        evbobject.status_code = payload.status_code
+        evbobject.pagination = evbobject.list = payload.get('pagination')
+        evbobject.pk = evbobject.id = payload.get('id')
+        return evbobject
