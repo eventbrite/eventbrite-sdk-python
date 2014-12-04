@@ -11,3 +11,11 @@ class Payload(dict):
         payload.reason = response.reason
         payload.status_code = response.status_code
         return payload
+
+
+class EventbriteObject(object):
+
+    list = False
+    payload = {}
+    type = ""
+    id = pk = None

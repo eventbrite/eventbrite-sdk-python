@@ -41,6 +41,5 @@ class TestClient(unittest.TestCase):
         self.assertTrue(isinstance(payload.headers, CaseInsensitiveDict))
 
 
-
 if __name__ == '__main__':
     unittest.main()
