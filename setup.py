@@ -23,7 +23,7 @@ if sys.argv[-1] == 'publish':
 readme = open('README.rst').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
-requirements = ["requests",]
+requirements = ["requests>=2.0",]
 
 test_requirements = []
 
@@ -68,6 +68,8 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
+        'Topic :: Internet :: WWW/HTTP',
+        'Topic :: Internet :: WWW/HTTP :: Dynamic Content'
     ],
     test_suite='tests',
     tests_require=test_requirements

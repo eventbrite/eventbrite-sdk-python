@@ -27,8 +27,8 @@ class TestClient(unittest.TestCase):
         payload = eventbrite.api("get", "/users/me/", {})
 
         self.assertEqual(
-            [u'id', u'first_name', u'last_name', u'emails', u'name'],
-            payload.keys()
+            sorted([u'id', u'first_name', u'last_name', u'emails', u'name']),
+            sorted(payload.keys())
         )
 
         self.assertEqual(
