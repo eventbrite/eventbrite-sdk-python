@@ -5,7 +5,7 @@ class Payload(dict):
     def create(cls, response):
         payload = cls(response.json())
         payload.url = response.url
-        payload.ok = reponse.ok
+        payload.ok = response.ok
         payload.elapsed = response.elapsed
         payload.headers = response.headers
         payload.reason = response.reason

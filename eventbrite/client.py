@@ -25,7 +25,7 @@ class Eventbrite(object):
         }
 
 
-    def api(self, method, path, expansions=(), **kwargs):
+    def api(self, method, path, data, expansions=()):
         method = method.strip().lower()
         if method not in self.allowed_methods:
             msg = "The '{0}' method is not accepted by the Eventbrite client.".format(
@@ -34,19 +34,19 @@ class Eventbrite(object):
             raise IllegalHttpMethod(msg)
         method = getattr(self, method)
         path = format_path(path)
-        method(path, **params)
+        return method(path, data)
 
 
-    def get(self, path, expansions=(), **kwargs):
-        response = requests.get(path, headers=self.headers, params=kwargs)
-        return Payload(response)
+    def get(self, path, data, expansions=()):
+        response = requests.get(path, headers=self.headers, params=data)
+        return Payload.create(response)
 
 
-    def post(self, path, expansions=(), **kwargs):
-        response = requests.post(path, headers=self.headers, data=kwargs)
-        return Payload(response)
+    def post(self, path, data, expansions=()):
+        response = requests.post(path, headers=self.headers, data=data)
+        return Payload.create(response)
 
 
-    def delete(self, path, expansions=(), **kwargs):
-        response = requests.delete(path, headers=self.headers, data=kwargs)
-        return Payload(response)
+    def delete(self, path, data, expansions=()):
+        response = requests.delete(path, headers=self.headers, data=data)
+        return Payload.create(response)

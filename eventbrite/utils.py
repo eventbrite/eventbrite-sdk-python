@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from .compat import string_type
 from .exceptions import InvalidResourcePath
 
 EVENTBRITE_API_URL = "https://www.eventbriteapi.com/v3"
@@ -17,7 +18,7 @@ def reverse(path):
 
 def format_path(path):
     error_msg = "The path argument must be a string that begins with '/'"
-    if not isinstance(path, basestring):
+    if not isinstance(path, string_type):
         raise InvalidResourcePath(error_msg)
     if path[0] != "/":
         raise InvalidResourcePath(error_msg)
