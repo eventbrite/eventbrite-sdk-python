@@ -35,16 +35,16 @@ lint:
 	flake8 eventbrite tests
 
 test:
-	python setup.py test
+	py.test
 
 test-all:
 	tox
 
-coverage:
-	coverage run --source eventbrite setup.py test
-	coverage report -m
-	coverage html
-	open htmlcov/index.html
+# coverage:
+# 	coverage run --source eventbrite setup.py test
+# 	coverage report -m
+# 	coverage html
+# 	open htmlcov/index.html
 
 docs:
 	rm -f docs/eventbrite.rst

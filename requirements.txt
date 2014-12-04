@@ -1,2 +1,6 @@
 wheel==0.23.0
 requests>=2.0
+mock
+unittest2
+pytest==2.6.4
+flake8

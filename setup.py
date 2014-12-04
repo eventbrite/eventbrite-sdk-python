@@ -25,16 +25,9 @@ history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 requirements = ["requests>=2.0",]
 
-test_requirements = []
-
 # Add Python 2.6-specific dependencies
 if sys.version_info[:2] < (2, 7):
     requirements.append('simplejson')
-    test_requirements.append('unittest2')
-
-# Add Python 2.x-specific dependencies
-if sys.version < '3':
-    test_requirements.append('mock')
 
 setup(
     name='eventbrite',
@@ -70,6 +63,5 @@ setup(
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content'
     ],
-    test_suite='tests',
-    tests_require=test_requirements
+    test_suite='tests'
 )
