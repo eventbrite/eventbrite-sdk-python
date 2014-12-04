@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import pprint
+
+
 class Payload(dict):
 
     @classmethod
@@ -11,6 +14,12 @@ class Payload(dict):
         payload.reason = response.reason
         payload.status_code = response.status_code
         return payload
+
+    @property
+    def pretty(self):
+        return pprint.pformat(self)
+
+
 
 
 class EventbriteObject(object):
