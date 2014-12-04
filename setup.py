@@ -8,10 +8,10 @@ try:
 except ImportError:
     from distutils.core import setup
 
-from eventbrite import __version__
+version = "3.0.0"
 
 if sys.argv[-1] == 'tag':
-    os.system("git tag -a %s -m 'version %s'" % (__version__, __version__))
+    os.system("git tag -a %s -m 'version %s'" % (version, version))
     os.system("git push --tags")
     sys.exit()
 
@@ -38,7 +38,7 @@ if sys.version < '3':
 
 setup(
     name='eventbrite',
-    version=__version__,
+    version=version,
     description='Official Eventbrite SDK for Python',
     long_description=readme + '\n\n' + history,
     author='Daniel Greenfeld, Bartek Ogryczak',
