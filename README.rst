@@ -36,3 +36,21 @@ library::
 
 
 .. _requests: https://pypi.python.org/pypi/requests
+
+
+TODOS
+--------
+
+Abstract the HTTP calls so they can work with:
+
+* requests
+* Google's HTTP client
+* Tornado
+* plain urllib/urllib2 (ugh)
+
+Calling different HTTP libraries::
+
+    Eventbrite(OAUTH_TOKEN, "requests")
+    Eventbrite(OAUTH_TOKEN, "google")
+    Eventbrite(OAUTH_TOKEN, "tornado")
+    Eventbrite(OAUTH_TOKEN, "native")
