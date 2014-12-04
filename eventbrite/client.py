@@ -3,12 +3,9 @@ from __future__ import unicode_literals
 
 import requests
 
+from .models import Payload
 from .exceptions import IllegalHttpMethod
 from .utils import format_path
-
-__all__ = ['EVENTBRITE_API_URL', 'IllegalHttpMethod', 'Eventbrite']
-
-EVENTBRITE_API_URL = "https://www.eventbriteapi.com/v3"
 
 
 class Eventbrite(object):
@@ -36,19 +33,20 @@ class Eventbrite(object):
             )
             raise IllegalHttpMethod(msg)
         method = getattr(self, method)
+        path = format_path(path)
         method(path, **params)
 
 
     def get(self, path, expansions=(), **kwargs):
-        path = format_path(path)
-        return requests.get(path, headers=self.headers, params=kwargs)
+        response = requests.get(path, headers=self.headers, params=kwargs)
+        return Payload(response)
 
 
     def post(self, path, expansions=(), **kwargs):
-        path = format_path(path)
-        return requests.post(path, headers=self.headers, data=kwargs)
+        response = requests.post(path, headers=self.headers, data=kwargs)
+        return Payload(response)
 
 
     def delete(self, path, expansions=(), **kwargs):
-        path = format_path(path)
-        return requests.delete(path, headers=self.headers, data=kwargs)
+        response = requests.delete(path, headers=self.headers, data=kwargs)
+        return Payload(response)
