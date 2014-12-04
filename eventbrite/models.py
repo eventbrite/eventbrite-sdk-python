@@ -36,9 +36,9 @@ class EventbriteObject(Payload):
 
     list = None
     pagination = None
-    payload = {}
     type = ""
-    id = pk = None
+    id = None
+    pk = None
 
     @classmethod
     def create_from_payload(cls, payload):
@@ -51,4 +51,5 @@ class EventbriteObject(Payload):
         evbobject.status_code = payload.status_code
         evbobject.pagination = evbobject.list = payload.get('pagination')
         evbobject.pk = evbobject.id = payload.get('id')
+        evbobject.type = ""
         return evbobject
