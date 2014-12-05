@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 import requests
 
+from .compat import json, string_type
 from .decorators import objectify
 from .models import Payload
 from .exceptions import IllegalHttpMethod
@@ -112,9 +113,9 @@ class Eventbrite(object):
     @objectify
     def event_attendees(self, event_id, status=None, changed_since=None):
         """
-            Returns a paginated response with a key of attendees, containing a list of attendee.
+        Returns a paginated response with a key of attendees, containing a list of attendee.
 
-            GET /events/:id/attendees/
+        GET /events/:id/attendees/
         """
         data = {}
         if status:  # TODO - check the types of valid status
@@ -122,3 +123,14 @@ class Eventbrite(object):
         if changed_since:
             data['changed_since'] = changed_since
         return self.get("/events/{0}/attendees/".format(event_id), data=data)
+
+    @objectify
+    def webhook_to_object(self, webhook):
+        """
+        Converts JSON sent by an Eventbrite Webhook to the appropriate Eventbrite object.
+        """
+        if isinstance(webhook, string_type):
+            # If still JSON, convert to a Python dict
+            webhook = json.dumps(webhook)
+
+        return self.get(webhook['api_url'])

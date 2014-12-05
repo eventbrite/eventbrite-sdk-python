@@ -24,7 +24,7 @@ class TestFormatPath(unittest.TestCase):
             format_path(5)
 
         with self.assertRaises(InvalidResourcePath):
-            format_path("https://www.eventbriteapi.com/v3/users/me/")
+            format_path("https://www.eventbrite.com")
 
         with self.assertRaises(InvalidResourcePath):
             format_path("http://www.eventbriteapi.com/v3/users/me/")

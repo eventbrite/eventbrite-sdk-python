@@ -20,6 +20,6 @@ def format_path(path):
     error_msg = "The path argument must be a string that begins with '/'"
     if not isinstance(path, string_type):
         raise InvalidResourcePath(error_msg)
-    if path[0] != "/":
+    if path[0] != "/" and not path.startswith(EVENTBRITE_API_URL):
         raise InvalidResourcePath(error_msg)
     return "{0}{1}".format(EVENTBRITE_API_URL, path)
