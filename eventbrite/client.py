@@ -118,6 +118,26 @@ class Eventbrite(object):
             data['changed_since'] = changed_since
         return self.get("/events/{0}/attendees/".format(event_id), data=data)
 
+    def get_event_attendee_by_id(self, event_id, attendee_id):
+        """
+        GET /events/:id/attendees/:id/
+        """
+        return self.get("/events/{0}/attendees/{1}/".format(event_id, attendee_id))
+
+    def get_event_ticket_classes(self, event_id):
+        """
+        Returns a paginated response with a key of ticket_classes, containing a list of ticket_class.
+
+        GET /events/:id/ticket_classes/
+        """
+        return self.get("/events/{0}/attendees/".format(event_id))
+
+    def get_event_ticket_class_by_id(self, event_id, ticket_class_id):
+        """
+        GET /events/:id/ticket_classes/:id/
+        """
+        return self.get("/events/{0}/attendees/{1}/".format(event_id, ticket_class_id))
+
     def webhook_to_object(self, webhook):
         """
         Converts JSON sent by an Eventbrite Webhook to the appropriate Eventbrite object.
