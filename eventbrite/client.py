@@ -3,12 +3,12 @@ from __future__ import unicode_literals
 
 import requests
 
-from .compat import string_type
 from .decorators import objectify
 from .models import Payload
 from .exceptions import IllegalHttpMethod
 from .utils import format_path
 import _version
+
 
 class Eventbrite(object):
 
@@ -20,7 +20,9 @@ class Eventbrite(object):
     @property
     def headers(self):
         return {
-            "agent": "eventbrite-python-sdk {version}".format(version=_version.__version__),
+            "agent": "eventbrite-python-sdk {version}".format(
+                version=_version.__version__
+                ),
             "Authorization": "Bearer {0}".format(self.oauth_token),
             "content-type": "application/json"
         }
@@ -28,9 +30,8 @@ class Eventbrite(object):
     def api(self, method, path, data, expansions=()):
         method = method.strip().lower()
         if method not in self.allowed_methods:
-            msg = "The '{0}' method is not accepted by the Eventbrite client.".format(
-                method
-            )
+            msg = "The '{0}' method is not accepted by the Eventbrite " \
+                "client.".format(method)
             raise IllegalHttpMethod(msg)
         method = getattr(self, method)
         return method(path, data)

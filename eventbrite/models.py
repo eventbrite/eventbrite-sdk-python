@@ -26,7 +26,6 @@ class Payload(dict):
     def pretty(self):
         return pprint.pformat(self)
 
-
     def objectify(self):
         """Returns an EventbriteObject representation of the Payload"""
         pass
