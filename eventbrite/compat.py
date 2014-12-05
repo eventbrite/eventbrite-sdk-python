@@ -20,6 +20,9 @@ except ImportError:
 
 try:
     import urllib.parse as urlparse
+    urljoin = urlparse.urljoin
 except ImportError:
-    import urlparse
+    from urlparse import urlparse
+    from urlparse import urljoin
+
 

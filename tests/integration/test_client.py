@@ -39,7 +39,7 @@ class TestClient(unittest.TestCase):
         )
 
         self.assertEqual(
-            payload.url,
+            payload.resource_uri,
             "https://www.eventbriteapi.com/v3/users/me/"
         )
 
@@ -69,7 +69,7 @@ class TestClientAccessMethods(unittest.TestCase):
         self.assertTrue(isinstance(evbobject, EventbriteObject))
 
         # check attributes
-        for attribute in ['id', 'pk', 'type', 'pagination', 'list', 'status_code']:
+        for attribute in ['id', 'pk', 'type', 'is_paginated', 'is_list', 'status_code']:
             self.assertTrue(attribute in evbobject.__dict__.keys())
 
         # check that an ID exists
@@ -84,7 +84,7 @@ class TestClientAccessMethods(unittest.TestCase):
         self.assertTrue(isinstance(evbobject, EventbriteObject))
 
         # check attributes
-        for attribute in ['id', 'pk', 'type', 'pagination', 'list', 'status_code']:
+        for attribute in ['id', 'pk', 'type', 'is_paginated', 'is_list', 'status_code']:
             self.assertTrue(attribute in evbobject.__dict__.keys())
 
         # check that the ID's match

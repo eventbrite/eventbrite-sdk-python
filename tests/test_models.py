@@ -38,7 +38,7 @@ class TestEventbriteObject(unittest.TestCase):
         self.assertTrue(evbobject.ok)
         self.assertEqual(
             self.url,
-            evbobject.url
+            evbobject.resource_uri
         )
         self.assertTrue(isinstance(evbobject.elapsed, timedelta))
         self.assertTrue(isinstance(evbobject.headers, CaseInsensitiveDict))
