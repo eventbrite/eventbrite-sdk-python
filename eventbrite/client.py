@@ -6,7 +6,10 @@ import requests
 from .compat import json, string_type
 from .decorators import objectify
 from .exceptions import IllegalHttpMethod
-from .utils import format_path
+from .utils import (
+    format_path,
+    construct_namespaced_dict,
+)
 from . import _version
 
 
@@ -145,6 +148,29 @@ class Eventbrite(object):
         GET /events/:id/discounts/
         """
         return self.get("/events/{0}/discounts/".format(event_id))
+
+    def create_event_discount(self, event_id,
+                              discount_code,
+                              discount_amount_off=None,
+                              discount_percent_off=None,
+                              discount_ticket_ids=None,
+                              discount_quantity_available=None,
+                              discount_start_date=None,
+                              discount_end_date=None):
+        """
+        POST /events/:id/discounts/
+
+            discount_code               string      required    Code used to activate discount
+            discount_amount_off         unknown     optional    Fixed reduction amount
+            discount_percent_off        string      optional    Percentage reduction
+            discount_ticket_ids         unknown     optional    IDs of tickets to limit discount to
+            discount_quantity_available integer     optional    Number of discount uses
+            discount_start_date         datetime    optional    Allow use from this date
+            discount_end_date           datetime    optional    Allow use until this date
+        """
+        data = construct_namespaced_dict("discount", locals()**)
+        return self.post("/events/{0}/discounts/".format(event_id), data=data)
+
 
     def get_event_discount_by_id(self, event_id, discount_id):
         """
