@@ -7,7 +7,7 @@ from .decorators import objectify
 from .models import Payload
 from .exceptions import IllegalHttpMethod
 from .utils import format_path
-import _version
+from . import _version
 
 
 class Eventbrite(object):
@@ -62,24 +62,25 @@ class Eventbrite(object):
         """
         Returns a user for the specified user as user.
 
-        users/:id/
+        GET users/:id/
 
-        :param int/str user_id: (optional) The id assigned to a user
+        :param int user_id: (optional) The id assigned to a user
 
         """
         if user_id:
             return self.get('/users/{0}/'.format(user_id))
         return self.get('/users/me/')
 
+    @objectify
     def get_user_orders(self, user_id=None, changed_since=None):
         """
         Returns a paginated response of orders, under the key orders, of all
         orders the user has placed (i.e. where the user was the person buying
         the tickets).
 
-        users/:id/orders/
+        GET users/:id/orders/
 
-        :param int/str user_id: (optional) The id assigned to a user. Leave empty to get current user.
+        :param int user_id: (optional) The id assigned to a user. Leave empty to get current user.
         :param datetime changed_since: (optional) Only return attendees changed on or after the time given
 
         .. note:: A datetime represented as a string in ISO8601 combined date and time format, always in UTC.
@@ -94,5 +95,30 @@ class Eventbrite(object):
             data['changed_since'] = changed_since
         return self.get(url, data=data)
 
-    def get_user_owned_events(self, user_id=None, status=None, order_by=None):
-        pass
+    @objectify
+    def get_order(self, order_id):
+        """
+        GET /orders/:id/
+        """
+        return self.get("/orders/{0}/".format(order_id))
+
+    @objectify
+    def get_event(self, event_id):
+        """
+        GET /events/:id/
+        """
+        return self.get("/events/{0}/".format(event_id))
+
+    @objectify
+    def event_attendees(self, event_id, status=None, changed_since=None):
+        """
+            Returns a paginated response with a key of attendees, containing a list of attendee.
+
+            GET /events/:id/attendees/
+        """
+        data = {}
+        if status:  # TODO - check the types of valid status
+            data['status'] = status
+        if changed_since:
+            data['changed_since'] = changed_since
+        return self.get("/events/{0}/attendees/".format(event_id), data=data)
