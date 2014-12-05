@@ -90,6 +90,19 @@ class TestClientAccessMethods(unittest.TestCase):
         # check that the ID's match
         self.assertEqual(evbobject.get('id'), USER_ID)
 
+    @unittest.skipIf(condition=skip_integration_tests, reason='Needs an OAUTH_TOKEN')
+    def test_webhook_no_internet(self):
+        webhook = {
+            "api_url": "https://www.eventbriteapi.com/v3/users/me/",
+            "config": {
+                "endpoint_url": "https://myawesomeapp.com/webhook",
+                "insecure_ssl": "0"
+            }
+        }
+        evbobject = self.eventbrite.webhook_to_object(webhook)
+        self.assertTrue('id' in evbobject)
+
+
 
 if __name__ == '__main__':
     unittest.main()

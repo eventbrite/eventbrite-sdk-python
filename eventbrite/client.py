@@ -128,9 +128,12 @@ class Eventbrite(object):
     def webhook_to_object(self, webhook):
         """
         Converts JSON sent by an Eventbrite Webhook to the appropriate Eventbrite object.
+
+        # TODO - Be able to handle Django and Flask request objects
         """
         if isinstance(webhook, string_type):
             # If still JSON, convert to a Python dict
             webhook = json.dumps(webhook)
+        payload = self.get(webhook['api_url'])
 
-        return self.get(webhook['api_url'])
+        return payload
