@@ -5,5 +5,5 @@ __author__ = 'Daniel Greenfeld'
 __email__ = 'danny@eventbrite.com'
 __version__ = '3.0.0-alpha1'
 
-from client import Eventbrite
-from utils import EVENTBRITE_API_URL
+from .client import Eventbrite
+from .utils import EVENTBRITE_API_URL
