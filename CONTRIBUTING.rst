@@ -82,12 +82,6 @@ Ready to contribute? Here's how to set up `eventbrite` for local development.
 
    To get flake8 and tox, just pip install them into your virtualenv.
 
-   **note:** To run the integration tests, you will need to set environment variables.
-
-   ::
-
-      export EVENTBRITE_EVENT_ID=XXXXXXXXX
-      export EVENTBRITE_OAUTH_TOKEN=XXXXXXXXXX
 
 6. Commit your changes and push your branch to GitHub::
 
