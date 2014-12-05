@@ -31,7 +31,9 @@ def get_mapping(_compiled_mapping=[]):
         raise  # TODO: do we handle it here?
 
 
-def reverse(path):
+def reverse(path_or_url):
+    parsed_url = urlparse(path_or_url)
+    path = parsed_url.path
     if not path.startswith(EVENTBRITE_API_PATH):
         error_msg = "The path argument must be a string that begins with '{0}'".format(EVENTBRITE_API_PATH)
         raise InvalidResourcePath(error_msg)
