@@ -72,5 +72,5 @@ def construct_namespaced_dict(namespace, unfiltered_dict):
     result_dict = {namespace: {}}
     for key, value in unfiltered_dict.items():
         if key.startswith(namespace):
-            result_dict[namespace][key.lstrip(namespace+'_')] = value
+            result_dict[namespace][key[len(namespace)+1:]] = value
     return result_dict
