@@ -39,5 +39,9 @@ class EventbriteObject(dict):
         self.pagination = data.get('pagination')
 
     @property
+    def is_paginated(self):
+        return bool(self.pagination)
+
+    @property
     def pretty(self):
         return pprint.pformat(self)
