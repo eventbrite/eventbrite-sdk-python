@@ -4,5 +4,10 @@
 class IllegalHttpMethod(Exception):
     pass
 
+
 class InvalidResourcePath(Exception):
+    pass
+
+
+class UnknownEndpoint(Exception):
     pass

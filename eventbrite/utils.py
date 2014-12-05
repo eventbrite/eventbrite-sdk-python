@@ -7,7 +7,10 @@ from .compat import (
     string_type,
     json,
 )
-from .exceptions import InvalidResourcePath
+from .exceptions import (
+    InvalidResourcePath,
+    UnknownEndpoint,
+)
 
 EVENTBRITE_API_URL = 'https://www.eventbriteapi.com/v3/'
 EVENTBRITE_API_PATH = urlparse(EVENTBRITE_API_URL).path
@@ -32,12 +35,13 @@ def reverse(path):
     if not path.startswith(EVENTBRITE_API_PATH):
         error_msg = "The path argument must be a string that begins with '{0}'".format(EVENTBRITE_API_PATH)
         raise InvalidResourcePath(error_msg)
-    path = path[4:]  # cutting of the common prefix
+    stripped_path = path[len(EVENTBRITE_API_PATH):]  # cutting of the common prefix
     mapping = get_mapping()
     for endpoint in mapping:
-        matches = re.match(endpoint["url_regexp"], path)
+        matches = re.match(endpoint["url_regexp"], stripped_path)
         if matches:
             return endpoint
+    raise UnknownEndpoint(path)
 
 
 def format_path(path):
