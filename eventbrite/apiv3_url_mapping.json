@@ -9,12 +9,6 @@
         "data_type": "serialized",
         "response_type": "single_response",
         "serializer": "Event",
-        "url_regexp": "^events/$"
-    },
-    {
-        "data_type": "serialized",
-        "response_type": "single_response",
-        "serializer": "Event",
         "url_regexp": "^events/composite-create/$"
     },
     {
@@ -22,18 +16,6 @@
         "response_type": "single_response",
         "serializer": "Event",
         "url_regexp": "^events/(?P<event_id>\\d+)/$"
-    },
-    {
-        "data_pattern": "{\"published\": True}",
-        "data_type": "raw",
-        "response_type": "Response",
-        "url_regexp": "^events/(?P<event_id>\\d+)/publish/$"
-    },
-    {
-        "data_pattern": "{\"unpublished\": True}",
-        "data_type": "raw",
-        "response_type": "Response",
-        "url_regexp": "^events/(?P<event_id>\\d+)/unpublish/$"
     },
     {
         "data_type": "serialized",
@@ -55,12 +37,6 @@
     },
     {
         "data_type": "serialized",
-        "response_type": "paginated_response",
-        "serializer": "Refund",
-        "url_regexp": "^events/(?P<event_id>\\d+)/refunds/$"
-    },
-    {
-        "data_type": "serialized",
         "response_type": "single_response",
         "serializer": "Order",
         "url_regexp": "^events/(?P<event_id>\\d+)/orders/(?P<order_id>\\d+)/refunds/$"
@@ -76,12 +52,6 @@
         "response_type": "single_response",
         "serializer": "TicketClass",
         "url_regexp": "^events/(?P<event_id>\\d+)/ticket_classes/$"
-    },
-    {
-        "data_pattern": "{\"deleted\": True}",
-        "data_type": "raw",
-        "response_type": "simple_response",
-        "url_regexp": "^events/(?P<event_id>\\d+)/ticket_classes/(?P<ticket_class_id>\\d+)/$"
     },
     {
         "data_type": "serialized",
