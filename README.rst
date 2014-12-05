@@ -20,32 +20,27 @@ Official Eventbrite_ SDK for Python
 Usage
 --------
 
-The  Eventbrite python SDK makes it trivial to interact with the Eventbrite API:
+The Eventbrite Python SDK makes it trivial to interact with the Eventbrite API:
+
+.. code-block:: python
 
     >>> from eventbrite import Eventbrite
     >>> eventbrite = Eventbrite('my-oauth-token')
     >>> user = eventbrite.get_user()  # Not passing an argument returns yourself
-    >>> print(user.pretty)
-    {u'emails': [{u'email': u'danny@eventbrite.com',
-                  u'primary': True,
-                  u'verified': True}],
-     u'first_name': u'Daniel',
-     u'id': u'1234567890',
-     u'last_name': u'Greenfeld',
-     u'name': u'Daniel Greenfeld'}
+    >>> user['id']
+    1234567890
+    >>> user['name']
+    Daniel Roy Greenfeld
 
-At the most lowest level, the Eventbrite python SDK is a wrapper around the requests_
-library::
+You can also specify API endpoints manually:
+
+.. code-block:: python
 
     >>> user = eventbrite.get('/users/me')
-    >>> print(user.pretty)
-    {u'emails': [{u'email': u'danny@eventbrite.com',
-                  u'primary': True,
-                  u'verified': True}],
-     u'first_name': u'Daniel',
-     u'id': u'1234567890',
-     u'last_name': u'Greenfeld',
-     u'name': u'Daniel Greenfeld'}
+    >>> user['id']
+    1234567890
+    >>> user['name']
+    Daniel Roy Greenfeld
 
 
 .. _requests: https://pypi.python.org/pypi/requests
