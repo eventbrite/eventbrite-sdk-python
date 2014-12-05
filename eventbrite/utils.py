@@ -36,7 +36,7 @@ def get_mapping(_compiled_mapping=[]):
 def reverse(path_or_url, only_serialized=False):
     """Look up data types returned by API endpoint for specific url/path
     """
-    parsed_url = urlparse(path_or_url)
+    parsed_url = urlparse.urlparse(path_or_url)
     path = parsed_url.path
     if not path.startswith(EVENTBRITE_API_PATH):
         error_msg = "The path argument must be a string that begins with '{0}'".format(EVENTBRITE_API_PATH)
