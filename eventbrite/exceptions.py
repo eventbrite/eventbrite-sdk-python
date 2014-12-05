@@ -11,3 +11,7 @@ class InvalidResourcePath(Exception):
 
 class UnknownEndpoint(Exception):
     pass
+
+
+class UnsupportedEndpoint(Exception):
+    pass

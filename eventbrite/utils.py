@@ -10,6 +10,7 @@ from .compat import (
 from .exceptions import (
     InvalidResourcePath,
     UnknownEndpoint,
+    UnsupportedEndpoint,
 )
 
 EVENTBRITE_API_URL = 'https://www.eventbriteapi.com/v3/'
@@ -31,7 +32,9 @@ def get_mapping(_compiled_mapping=[]):
         raise  # TODO: do we handle it here?
 
 
-def reverse(path_or_url):
+def reverse(path_or_url, only_serialized=False):
+    """Look up data types returned by API endpoint for specific url/path
+    """
     parsed_url = urlparse(path_or_url)
     path = parsed_url.path
     if not path.startswith(EVENTBRITE_API_PATH):
@@ -42,6 +45,10 @@ def reverse(path_or_url):
     for endpoint in mapping:
         matches = re.match(endpoint["url_regexp"], stripped_path)
         if matches:
+            if endpoint["data_type"] == "UNKNOWN":
+                raise UnsupportedEndpoint(path)
+            if only_serialized and endpoint["data_type"] != "serialized":
+                raise UnsupportedEndpoint(path)
             return endpoint
     raise UnknownEndpoint(path)
 
