@@ -336,7 +336,8 @@
         "url_regexp": "^organizers/(?P<organizer_id>\\d+)/$"
     },
     {
-        "response_type": "UNKNOW",
+        "data_type": "redirect",
+        "redirect_path": "/v3/events/0000/attendees/0000/",
         "url_regexp": "^attendees/(?P<attendee_id>\\d+)/$"
     },
     {

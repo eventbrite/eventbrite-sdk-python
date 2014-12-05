@@ -18,4 +18,8 @@ except ImportError:
     # For python 2.6
     import json
 
+try:
+    import urllib.parse as urlparse
+except ImportError:
+    import urlparse
 

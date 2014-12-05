@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-from urlparse import urljoin, urlparse
 import os.path
 import re
 
 from .compat import (
     string_type,
     json,
+    urlparse,
 )
 from .exceptions import (
     InvalidResourcePath,
@@ -13,7 +13,7 @@ from .exceptions import (
 )
 
 EVENTBRITE_API_URL = 'https://www.eventbriteapi.com/v3/'
-EVENTBRITE_API_PATH = urlparse(EVENTBRITE_API_URL).path
+EVENTBRITE_API_PATH = urlparse.urlparse(EVENTBRITE_API_URL).path
 
 URL_MAP_FILE = os.path.join(os.path.dirname(__file__), "apiv3_url_mapping.json")
 
@@ -54,5 +54,5 @@ def format_path(path):
 
     # Using the HTTP shortcut
     if path.startswith("/"):
-        return urljoin(EVENTBRITE_API_URL, path.lstrip('/'))
+        return urlparse.urljoin(EVENTBRITE_API_URL, path.lstrip('/'))
     raise InvalidResourcePath(error_msg)
