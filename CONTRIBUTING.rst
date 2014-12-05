@@ -111,12 +111,19 @@ To run a subset of tests::
 
     $ python -m unittest tests.test_eventbrite
 
-To run integration tests:
+To run enable integration tests:
 
 1. Get an Eventbrite OAUTH token.
+
 2. Via the Eventbrite website, create an event. Get the Event ID
+
+3. Add those values as environment variables
 
 ::
 
     export EVENTBRITE_EVENT_ID=XXXXXXXXX
     export EVENTBRITE_OAUTH_TOKEN=XXXXXXXXXX
+
+4. Run the test suite::
+
+    make test
