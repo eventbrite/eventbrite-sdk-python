@@ -41,6 +41,7 @@ def reverse(path):
 
 
 def format_path(path):
+    import ipdb; ipdb.set_trace()
     error_msg = "The path argument must be a string that begins with '/'"
     if not isinstance(path, string_type):
         raise InvalidResourcePath(error_msg)
@@ -50,5 +51,5 @@ def format_path(path):
 
     # Using the HTTP shortcut
     if path.startswith("/"):
-        return urljoin(EVENTBRITE_API_URL, path)
+        return urljoin(EVENTBRITE_API_URL, path.lstrip('/'))
     raise InvalidResourcePath(error_msg)
