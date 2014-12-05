@@ -111,7 +111,7 @@ class Eventbrite(object):
         return self.get("/events/{0}/".format(event_id))
 
     @objectify
-    def event_attendees(self, event_id, status=None, changed_since=None):
+    def get_event_attendees(self, event_id, status=None, changed_since=None):
         """
         Returns a paginated response with a key of attendees, containing a list of attendee.
 
