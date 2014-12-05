@@ -12,16 +12,16 @@ from .exceptions import InvalidResourcePath
 EVENTBRITE_API_URL = 'https://www.eventbriteapi.com/v3/'
 EVENTBRITE_API_PATH = urlparse(EVENTBRITE_API_URL).path
 
-URL_MAP_FILE = os.path.join(os.path.realpath(__file__), "apiv3_url_mapping.json")
+URL_MAP_FILE = os.path.join(os.path.dirname(__file__), "apiv3_url_mapping.json")
 
 
 def get_mapping(_compiled_mapping=[]):
     if _compiled_mapping:
         return _compiled_mapping
     try:
-        mapping = json.load(os.open(URL_MAP_FILE))
+        mapping = json.load(open(URL_MAP_FILE))
         for endpoint in mapping:
-            endpoint["url_regex"] = re.compile(endpoint["url_regex"])
+            endpoint["url_regexp"] = re.compile(endpoint["url_regexp"])
         _compiled_mapping = mapping
         return _compiled_mapping
     except Exception:
@@ -35,7 +35,7 @@ def reverse(path):
     path = path[4:]  # cutting of the common prefix
     mapping = get_mapping()
     for endpoint in mapping:
-        matches = re.match(endpoint["url_regex"], path)
+        matches = re.match(endpoint["url_regexp"], path)
         if matches:
             return endpoint
 
