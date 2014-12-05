@@ -14,6 +14,7 @@ EVENTBRITE_API_PATH = urlparse(EVENTBRITE_API_URL).path
 
 URL_MAP_FILE = os.path.join(os.path.realpath(__file__), "apiv3_url_mapping.json")
 
+
 def get_mapping(_compiled_mapping=[]):
     if _compiled_mapping:
         return _compiled_mapping
@@ -43,18 +44,11 @@ def format_path(path):
     error_msg = "The path argument must be a string that begins with '/'"
     if not isinstance(path, string_type):
         raise InvalidResourcePath(error_msg)
-<<<<<<< HEAD
     # Probably a webhook path
     if path.startswith(EVENTBRITE_API_URL):
         return path
 
     # Using the HTTP shortcut
-    if path,startswith("/"):
-        return "{0}{1}".format(EVENTBRITE_API_URL, path)
-
+    if path.startswith("/"):
+        return urljoin(EVENTBRITE_API_URL, path)
     raise InvalidResourcePath(error_msg)
-=======
-    if path[0] != "/" and not path.startswith(EVENTBRITE_API_URL):
-        raise InvalidResourcePath(error_msg)
-    return urljoin(EVENTBRITE_API_URL, path)
->>>>>>> implementing reverse magic
