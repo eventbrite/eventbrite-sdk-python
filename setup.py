@@ -8,7 +8,9 @@ try:
 except ImportError:
     from distutils.core import setup
 
-version = "3.0.0-alpha5"
+from eventbrite import __version__
+
+version = __version__
 
 if sys.argv[-1] == 'tag':
     os.system("git tag -a %s -m 'version %s'" % (version, version))
