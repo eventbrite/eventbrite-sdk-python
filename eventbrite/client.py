@@ -168,9 +168,8 @@ class Eventbrite(object):
             discount_start_date         datetime    optional    Allow use from this date
             discount_end_date           datetime    optional    Allow use until this date
         """
-        data = construct_namespaced_dict("discount", locals()**)
+        data = construct_namespaced_dict("discount", **locals())
         return self.post("/events/{0}/discounts/".format(event_id), data=data)
-
 
     def get_event_discount_by_id(self, event_id, discount_id):
         """
