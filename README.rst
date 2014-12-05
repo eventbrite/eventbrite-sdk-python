@@ -12,7 +12,7 @@ eventbrite-sdk-python
         :target: https://pypi.python.org/pypi/eventbrite
 
 
-Official Eventbrite SDK for Python
+Official Eventbrite_ SDK for Python
 
 * Free software: Apache 2 license
 * Documentation: https://eventbrite.readthedocs.org.
@@ -20,37 +20,49 @@ Official Eventbrite SDK for Python
 Usage
 --------
 
-At the most basic level, the Eventbrite API is a wrapper around the requests_
-library::
+The  Eventbrite python SDK makes it trivial to interact with the Eventbrite API:
 
     >>> from eventbrite import Eventbrite
     >>> eventbrite = Eventbrite('my-oauth-token')
-    >>> payload = eventbrite.get('/users/me')
+    >>> user = eventbrite.get_user()  # Not passing an argument returns yourself
+    >>> print(user.pretty)
     {u'emails': [{u'email': u'danny@eventbrite.com',
                   u'primary': True,
                   u'verified': True}],
      u'first_name': u'Daniel',
-     u'id': u'103945044409',
+     u'id': u'1234567890',
+     u'last_name': u'Greenfeld',
+     u'name': u'Daniel Greenfeld'}
+
+At the most lowest level, the Eventbrite python SDK is a wrapper around the requests_
+library::
+
+    >>> user = eventbrite.get('/users/me')
+    >>> print(user.pretty)
+    {u'emails': [{u'email': u'danny@eventbrite.com',
+                  u'primary': True,
+                  u'verified': True}],
+     u'first_name': u'Daniel',
+     u'id': u'1234567890',
      u'last_name': u'Greenfeld',
      u'name': u'Daniel Greenfeld'}
 
 
 .. _requests: https://pypi.python.org/pypi/requests
+.. _Eventbrite: https://www.eventbrite.com
 
 
 TODOS
 --------
 
-Abstract the HTTP calls so they can work with:
+Abstract the HTTP calls so they can work with all of the below:
 
 * requests
 * Google's HTTP client
 * Tornado
-* plain urllib/urllib2 (ugh)
 
 Calling different HTTP libraries::
 
     Eventbrite(OAUTH_TOKEN, "requests")
     Eventbrite(OAUTH_TOKEN, "google")
     Eventbrite(OAUTH_TOKEN, "tornado")
-    Eventbrite(OAUTH_TOKEN, "native")
