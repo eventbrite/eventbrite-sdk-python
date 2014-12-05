@@ -103,6 +103,5 @@ class TestClientAccessMethods(unittest.TestCase):
         self.assertTrue('id' in evbobject)
 
 
-
 if __name__ == '__main__':
     unittest.main()
