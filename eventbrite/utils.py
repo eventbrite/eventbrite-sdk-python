@@ -67,9 +67,10 @@ def format_path(path):
         return urljoin(EVENTBRITE_API_URL, path.lstrip('/'))
     raise InvalidResourcePath(error_msg)
 
-def construct_namespaced_dict(namespace, **kwargs):
+
+def construct_namespaced_dict(namespace, unfiltered_dict):
     result_dict = {namespace: {}}
-    for key, value in kwargs:
+    for key, value in unfiltered_dict.items():
         if key.startswith(namespace):
             result_dict[namespace][key.lstrip(namespace+'_')] = value
     return result_dict
