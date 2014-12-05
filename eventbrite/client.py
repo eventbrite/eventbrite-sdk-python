@@ -130,13 +130,27 @@ class Eventbrite(object):
 
         GET /events/:id/ticket_classes/
         """
-        return self.get("/events/{0}/attendees/".format(event_id))
+        return self.get("/events/{0}/ticket_classes/".format(event_id))
 
     def get_event_ticket_class_by_id(self, event_id, ticket_class_id):
         """
         GET /events/:id/ticket_classes/:id/
         """
-        return self.get("/events/{0}/attendees/{1}/".format(event_id, ticket_class_id))
+        return self.get("/events/{0}/ticket_classes/{1}/".format(event_id, ticket_class_id))
+
+    def get_event_discounts(self, event_id):
+        """
+        Returns a paginated response with a key of discounts, containing a list of discount.
+
+        GET /events/:id/discounts/
+        """
+        return self.get("/events/{0}/discounts/".format(event_id))
+
+    def get_event_discount_by_id(self, event_id, discount_id):
+        """
+        GET /events/:id/discounts/:id/
+        """
+        return self.get("/events/{0}/discounts/{1}/".format(event_id, discount_id))
 
     def webhook_to_object(self, webhook):
         """
