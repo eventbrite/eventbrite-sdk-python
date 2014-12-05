@@ -12,5 +12,5 @@ def objectify(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         payload = func(*args, **kwargs)
-        return EventbriteObject.create_from_payload(payload)
+        return EventbriteObject.create(payload)
     return wrapper

@@ -2,32 +2,7 @@
 import pprint
 
 
-class Payload(dict):
-    """The object returned from the low-level client calls:
-
-        * .api()
-        * .get()
-        * .post()
-        * .delete()
-    """
-
-    @classmethod
-    def create(cls, response):
-        payload = cls(response.json())
-        payload.url = response.url
-        payload.ok = response.ok
-        payload.elapsed = response.elapsed
-        payload.headers = response.headers
-        payload.reason = response.reason
-        payload.status_code = response.status_code
-        return payload
-
-    @property
-    def pretty(self):
-        return pprint.pformat(self)
-
-
-class EventbriteObject(Payload):
+class EventbriteObject(dict):
 
     list = None
     pagination = None
@@ -36,15 +11,20 @@ class EventbriteObject(Payload):
     pk = None
 
     @classmethod
-    def create_from_payload(cls, payload):
-        evbobject = cls(payload)
-        evbobject.url = payload.url
-        evbobject.ok = payload.ok
-        evbobject.elapsed = payload.elapsed
-        evbobject.headers = payload.headers
-        evbobject.reason = payload.reason
-        evbobject.status_code = payload.status_code
-        evbobject.pagination = evbobject.list = payload.get('pagination')
-        evbobject.pk = evbobject.id = payload.get('id')
+    def create(cls, response):
+        data = response.json()
+        evbobject = cls(data)
+        evbobject.url = response.url
+        evbobject.ok = response.ok
+        evbobject.elapsed = response.elapsed
+        evbobject.headers = response.headers
+        evbobject.reason = response.reason
+        evbobject.status_code = response.status_code
+        evbobject.pagination = evbobject.list = data.get('pagination')
+        evbobject.pk = evbobject.id = data.get('id')
         evbobject.type = ""
         return evbobject
+
+    @property
+    def pretty(self):
+        return pprint.pformat(self)

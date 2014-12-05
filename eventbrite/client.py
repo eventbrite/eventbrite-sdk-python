@@ -5,7 +5,6 @@ import requests
 
 from .compat import json, string_type
 from .decorators import objectify
-from .models import Payload
 from .exceptions import IllegalHttpMethod
 from .utils import format_path
 from . import _version
@@ -37,20 +36,20 @@ class Eventbrite(object):
         method = getattr(self, method)
         return method(path, data)
 
+    @objectify
     def get(self, path, data=None, expansions=()):
         path = format_path(path)
-        response = requests.get(path, headers=self.headers, params=data or {})
-        return Payload.create(response)
+        return requests.get(path, headers=self.headers, params=data or {})
 
+    @objectify
     def post(self, path, data=None, expansions=()):
         path = format_path(path)
-        response = requests.post(path, headers=self.headers, data=data or {})
-        return Payload.create(response)
+        return requests.post(path, headers=self.headers, data=data or {})
 
+    @objectify
     def delete(self, path, data=None, expansions=()):
         path = format_path(path)
-        response = requests.delete(path, headers=self.headers, data=data or {})
-        return Payload.create(response)
+        return requests.delete(path, headers=self.headers, data=data or {})
 
     ############################
     #
@@ -58,7 +57,6 @@ class Eventbrite(object):
     #
     ############################
 
-    @objectify
     def get_user(self, user_id=None):
         """
         Returns a user for the specified user as user.
@@ -72,7 +70,6 @@ class Eventbrite(object):
             return self.get('/users/{0}/'.format(user_id))
         return self.get('/users/me/')
 
-    @objectify
     def get_user_orders(self, user_id=None, changed_since=None):
         """
         Returns a paginated response of orders, under the key orders, of all
@@ -96,21 +93,18 @@ class Eventbrite(object):
             data['changed_since'] = changed_since
         return self.get(url, data=data)
 
-    @objectify
     def get_order(self, order_id):
         """
         GET /orders/:id/
         """
         return self.get("/orders/{0}/".format(order_id))
 
-    @objectify
     def get_event(self, event_id):
         """
         GET /events/:id/
         """
         return self.get("/events/{0}/".format(event_id))
 
-    @objectify
     def get_event_attendees(self, event_id, status=None, changed_since=None):
         """
         Returns a paginated response with a key of attendees, containing a list of attendee.
@@ -124,7 +118,6 @@ class Eventbrite(object):
             data['changed_since'] = changed_since
         return self.get("/events/{0}/attendees/".format(event_id), data=data)
 
-    @objectify
     def webhook_to_object(self, webhook):
         """
         Converts JSON sent by an Eventbrite Webhook to the appropriate Eventbrite object.
