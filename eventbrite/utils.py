@@ -45,7 +45,6 @@ def reverse(path):
 
 
 def format_path(path):
-    import ipdb; ipdb.set_trace()
     error_msg = "The path argument must be a string that begins with '/'"
     if not isinstance(path, string_type):
         raise InvalidResourcePath(error_msg)
