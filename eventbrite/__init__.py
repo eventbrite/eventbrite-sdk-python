@@ -7,5 +7,9 @@ __email__ = 'danny@eventbrite.com'
 
 from ._version import __version__
 
-from .client import Eventbrite
-from .utils import EVENTBRITE_API_URL
+try:
+    from .client import Eventbrite
+    from .utils import EVENTBRITE_API_URL
+except ImportError:
+    # Avoiding the setup.py bootstrap problem
+    pass
