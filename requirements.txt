@@ -4,3 +4,4 @@ mock
 unittest2
 pytest==2.6.4
 flake8
+coverage

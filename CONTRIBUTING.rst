@@ -67,6 +67,7 @@ Ready to contribute? Here's how to set up `eventbrite` for local development.
     $ mkvirtualenv eventbrite
     $ cd eventbrite/
     $ python setup.py develop
+    $ pip install -r requirements.txt
 
 4. Create a branch for local development::
 
@@ -81,7 +82,6 @@ Ready to contribute? Here's how to set up `eventbrite` for local development.
     $ tox
 
    To get flake8 and tox, just pip install them into your virtualenv.
-
 
 6. Commit your changes and push your branch to GitHub::
 
@@ -107,11 +107,24 @@ Before you submit a pull request, check that it meets these guidelines:
 Tips
 ----
 
-To run a subset of tests::
+Running a subset of tests
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::
 
     $ python -m unittest tests.test_eventbrite
 
-To run enable integration tests:
+Checking test coverage
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+    $ make coverage
+
+Running integration tests
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In order to expedite development, by default these do not run.
 
 1. Get an Eventbrite OAUTH token.
 
@@ -121,8 +134,8 @@ To run enable integration tests:
 
 ::
 
-    export EVENTBRITE_EVENT_ID=XXXXXXXXX
-    export EVENTBRITE_OAUTH_TOKEN=XXXXXXXXXX
+    $ export EVENTBRITE_EVENT_ID=XXXXXXXXX
+    $ export EVENTBRITE_OAUTH_TOKEN=XXXXXXXXXX
 
 4. Run the test suite::
 
