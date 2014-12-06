@@ -19,8 +19,8 @@ except ImportError:
     import json
 
 try:
-    import urllib.parse as urlparse
-    urljoin = urlparse.urljoin
+    from urllib.parse import urlparse
+    from urllib.parse import urljoin
 except ImportError:
     from urlparse import urlparse
     from urlparse import urljoin
