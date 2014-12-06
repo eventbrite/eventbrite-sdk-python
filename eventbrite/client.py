@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-import os
+from platform import platform
 
 import requests
 
@@ -28,8 +28,7 @@ class Eventbrite(object):
             "content-type": "application/json",
             "User-Agent": "eventbrite-python-sdk {version} ({system})".format(
                 version=_version.__version__,
-                system=os.uname()
-
+                system=platform(),
             )
         }
 
