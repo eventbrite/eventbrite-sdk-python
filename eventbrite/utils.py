@@ -15,7 +15,7 @@ from .exceptions import (
 )
 
 EVENTBRITE_API_URL = 'https://www.eventbriteapi.com/v3/'
-EVENTBRITE_API_PATH = urlparse(EVENTBRITE_API_URL).path
+EVENTBRITE_API_PATH = urlparse.urlparse(EVENTBRITE_API_URL).path
 
 URL_MAP_FILE = os.path.join(os.path.dirname(__file__), "apiv3_url_mapping.json")
 
