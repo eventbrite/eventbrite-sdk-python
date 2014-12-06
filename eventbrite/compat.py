@@ -19,10 +19,12 @@ except ImportError:
     import json
 
 try:
-    from urllib.parse import urlparse
-    from urllib.parse import urljoin
+    from urllib.parse import (
+        urlparse,
+        urljoin,
+    )
 except ImportError:
-    from urlparse import urlparse
-    from urlparse import urljoin
-
-
+    from urlparse import (
+        urlparse,
+        urljoin,
+    )

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import os
 
 import requests
 
@@ -23,11 +24,13 @@ class Eventbrite(object):
     @property
     def headers(self):
         return {
-            "agent": "eventbrite-python-sdk {version}".format(
-                version=_version.__version__
-                ),
             "Authorization": "Bearer {0}".format(self.oauth_token),
-            "content-type": "application/json"
+            "content-type": "application/json",
+            "User-Agent": "eventbrite-python-sdk {version} ({system})".format(
+                version=_version.__version__,
+                system=os.uname()
+
+            )
         }
 
     def api(self, method, path, data, expansions=()):
