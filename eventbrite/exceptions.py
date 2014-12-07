@@ -1,17 +1,20 @@
 # -*- coding: utf-8 -*-
 
-
-class IllegalHttpMethod(Exception):
+class EventbriteException(Exception):
     pass
 
 
-class InvalidResourcePath(Exception):
+class IllegalHttpMethod(EventbriteException):
     pass
 
 
-class UnknownEndpoint(Exception):
+class InvalidResourcePath(EventbriteException):
     pass
 
 
-class UnsupportedEndpoint(Exception):
+class UnknownEndpoint(EventbriteException):
+    pass
+
+
+class UnsupportedEndpoint(EventbriteException):
     pass
