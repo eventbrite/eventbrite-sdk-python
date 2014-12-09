@@ -14,11 +14,6 @@ from .exceptions import (
     UnsupportedEndpoint,
 )
 
-try:
-    from flask import Request as FlaskRequest
-except ImportError:
-    FlaskRequest = None
-
 EVENTBRITE_API_URL = 'https://www.eventbriteapi.com/v3/'
 EVENTBRITE_API_PATH = urlparse(EVENTBRITE_API_URL).path
 
@@ -81,16 +76,8 @@ def construct_namespaced_dict(namespace, unfiltered_dict):
     return result_dict
 
 
-def get_webhook_from_django_request(request):
-    return {}
-
-
-def get_webhook_from_flask_request(request):
-    return request.get_json()
-
-
 def get_webhook_from_request(request):
-    if isinstance(request, FlaskRequest):
-        return get_webhook_from_flask_request(request)
+    if hasattr(request, "get_json"):
+        return request.get_json()
 
     return request

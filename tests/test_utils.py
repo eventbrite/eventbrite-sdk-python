@@ -7,12 +7,15 @@ test_eventbrite
 
 Tests for `eventbrite` module.
 """
+import json
 
 from eventbrite.exceptions import InvalidResourcePath
-from eventbrite.utils import format_path
+from eventbrite.utils import (
+    format_path,
+    get_webhook_from_request
+)
 
-
-from .base import unittest
+from .base import unittest, mock
 
 
 class TestFormatPath(unittest.TestCase):
@@ -36,6 +39,23 @@ class TestFormatPath(unittest.TestCase):
         path = format_path('/users/me')
 
         self.assertEqual(path, "https://www.eventbriteapi.com/v3/users/me")
+
+
+    def test_get_webhook_request(self):
+        # Construct our mock Flask request
+        request = mock.Mock()
+        data = {
+            "api_url": "https://www.eventbriteapi.com/v3/users/me/",
+            "config": {
+                "endpoint_url": "https://eb-demo-3.herokuapp.com/webhook",
+                "insecure_ssl": "0"
+            }
+        }
+        request.get_json = lambda: data
+
+        # Test to see if the data can be fetche correctly
+        request_data = get_webhook_from_request(request)
+        self.assertEqual(data, request_data)
 
 
 if __name__ == '__main__':

@@ -195,7 +195,8 @@ class Eventbrite(object):
             webhook = json.dumps(webhook)
 
         # if a flask.Request object, try to convert that to a webhook
-        webhook = get_webhook_from_request(webhook)
+        if not isinstance(webhook, dict):
+            webhook = get_webhook_from_request(webhook)
 
         try:
             webhook['api_url']
