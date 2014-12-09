@@ -6,10 +6,14 @@ import requests
 
 from .compat import json, string_type
 from .decorators import objectify
-from .exceptions import IllegalHttpMethod
+from .exceptions import (
+    IllegalHttpMethod,
+    InvalidWebhook
+)
 from .utils import (
     format_path,
     construct_namespaced_dict,
+    get_webhook_from_request
 )
 from . import _version
 
@@ -184,11 +188,20 @@ class Eventbrite(object):
         """
         Converts JSON sent by an Eventbrite Webhook to the appropriate Eventbrite object.
 
-        # TODO - Be able to handle Django and Flask request objects
+        # TODO - Add capability to handle Django equest objects
         """
         if isinstance(webhook, string_type):
             # If still JSON, convert to a Python dict
             webhook = json.dumps(webhook)
+
+        # if a flask.Request object, try to convert that to a webhook
+        webhook = get_webhook_from_request(webhook)
+
+        try:
+            webhook['api_url']
+        except KeyError:
+            raise InvalidWebhook
+
         payload = self.get(webhook['api_url'])
 
         return payload

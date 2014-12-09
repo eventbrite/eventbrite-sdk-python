@@ -29,3 +29,7 @@ class InternetConnectionError(ConnectionError):
     intuitively named exception.
     """
     pass
+
+
+class InvalidWebhook(EventbriteException):
+    pass
