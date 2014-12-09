@@ -42,6 +42,29 @@ You can also specify API endpoints manually:
     >>> user['name']
     Daniel Roy Greenfeld
 
+Usage with Frameworks
+----------------------
+
+When using Flask, you can convert incoming webhook requests into Eventbrite
+API objects using the `webhook_to_object()` method:
+
+.. code-block:: python
+
+    @app.route('/webhook', methods=['POST'])
+    def webhook():
+
+
+        # Use the API client to convert from a webhook to an API object
+        api_object = eventbrite.webhook_to_object(request)
+
+        # Process the API object
+        if api_object.type == 'User':
+            do_user_process(api_object)
+
+        if api_object.type == 'Event':
+            do_event_process(api_object)
+
+        return ""
 
 .. _requests: https://pypi.python.org/pypi/requests
 .. _Eventbrite: https://www.eventbrite.com
