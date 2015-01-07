@@ -1,0 +1,9 @@
+def {{ method_name }}(self,{% for arg in arguments %} {{ arg }},{% endfor %}):
+    """
+    {{ docstring }}
+    """
+    {% if arguments %}
+    return self.{{ method_type }}("{{ method_path }}".format({% for arg in arguments %}{{ arg }},{% endfor %}))
+    {% else %}
+    return self.{{ method_type }}("{{ method_path }}")
+    {% endif%}
