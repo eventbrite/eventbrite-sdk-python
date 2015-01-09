@@ -4,14 +4,16 @@ import glob
 import os
 import re
 
+import click
 from jinja2 import FileSystemLoader, Environment
 
 API_DIR = os.path.abspath(__file__).replace('generate_access_methods.py', '')
 
+@click.command()
+@click.option('--path', help='Path to endpoint docs')
+def generate_access_methods(path):
 
-def generate_access_methods(path_to_endpoint_docs):
-
-    with work_in(path_to_endpoint_docs):
+    with work_in(path):
         all_methods = []
         docstrings = []
         for file_name in glob.glob('*.rst'):
@@ -146,6 +148,5 @@ def render_from_template(directory, template_name, **kwargs):
 
 
 if __name__ == '__main__':
-    path = '/Users/danny/eventbrite/core/django/src/www/eventbrite/ebapi/docs/endpoints'
-    generate_access_methods(path)
+    generate_access_methods()
 
