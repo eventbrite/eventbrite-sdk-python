@@ -1,9 +1,7 @@
-def {{ method_name }}(self,{% for arg in arguments %} {{ arg }},{% endfor %}):
-    """
-    {{ docstring }}
-    """
-    {% if arguments %}
-    return self.{{ method_type }}("{{ method_path }}".format({% for arg in arguments %}{{ arg }},{% endfor %}))
-    {% else %}
-    return self.{{ method_type }}("{{ method_path }}")
-    {% endif%}
+
+    def {{ method_name }}(self{% if arguments %},{% endif %}{% for arg in arguments %} {{ arg }}{% if not loop.last %},{% endif %}{% endfor %}):
+        """
+        **docstring**
+        """
+        {% if arguments %}
+        return self.{{ method_type }}("{{ method_path }}".format({% for arg in arguments %}{{ arg }}{% if not loop.last %},{% endif %}{% endfor %})){% else %}return self.{{ method_type }}("{{ method_path }}"){% endif%}
