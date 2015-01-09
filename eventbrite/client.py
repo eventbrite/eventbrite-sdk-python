@@ -4,6 +4,7 @@ from platform import platform
 
 import requests
 
+from .access_methods import AccessMethodsMixin
 from .compat import json, string_type
 from .decorators import objectify
 from .exceptions import (
@@ -18,7 +19,7 @@ from .utils import (
 from . import _version
 
 
-class Eventbrite(object):
+class Eventbrite(AccessMethodsMixin):
 
     allowed_methods = ['post', 'get', 'delete']
 

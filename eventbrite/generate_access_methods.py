@@ -68,7 +68,7 @@ def generate_access_methods(path):
 
     with open('access_methods.py', 'w') as f:
         data = {"now": datetime.datetime.now()}
-        base = render_from_template('.', 'access_methods_base.jinja', **data)
+        base = render_from_template('./jinja2', 'access_methods_base.jinja', **data)
         f.write(base)
         for method, docstring in contents:
             method = method.replace("**docstring**", docstring)
@@ -136,7 +136,7 @@ def create_method_from_row(row):
         'method_type': row.split(' ')[0].lower().strip(),
         'method_path': get_method_path_from_row(row),
     }
-    return render_from_template('.', 'access_methods.jinja', **data)
+    return render_from_template('./jinja2', 'access_methods.jinja', **data)
 
 
 def render_from_template(directory, template_name, **kwargs):
