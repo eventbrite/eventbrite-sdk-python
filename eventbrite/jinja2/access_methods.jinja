@@ -2,7 +2,6 @@
     def {{ method_name }}(self{% if arguments %},{% endif %}{% for arg in arguments %} {{ arg }}{% if not loop.last %},{% endif %}{% endfor %}{% if params %}, {% for param in params %} {{ param.name.replace(".", "_") }}{% if not param.required%}=None{% endif %},{% endfor %}{% else %}, {% endif %} **data):
         """
         **docstring**
-
         {% for param in params %}:param {{ param.type }} {{ param.name }}: {% if not param.required %}(optional){% endif %} {{ param.description }}
         {% endfor %}
         """

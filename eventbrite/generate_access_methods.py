@@ -79,6 +79,8 @@ def generate_access_methods(path):
         base = render_from_template('./jinja2', 'access_methods_base.jinja', **data)
         f.write(base)
         for method, docstring in contents:
+            docstring = docstring.replace('\n\n\n', '\n')
+            docstring = docstring.replace('\n\n', '\n')
             docstring = docstring.replace('\n\n        :param', '\n        :param')
             method = method.replace("**docstring**", docstring)
             f.write('\n')
@@ -113,7 +115,6 @@ def work_in(dirname=None):
 
 
 def get_method_name_from_row(row):
-    print row
     row = row.strip()
     if row.endswith(':id/'):
         row = row.replace(':id', 'by/id')
@@ -130,7 +131,6 @@ def get_method_name_from_row(row):
     method_pieces = [x for x in method_pieces if len(x)]
     method_pieces.insert(0, prefix)
     # TODO: Handle non plural methods better
-    print method_pieces
     return '_'.join(method_pieces)
 
 
@@ -190,10 +190,10 @@ def create_method_from_row(row, path, file_name, method_count):
     params = get_params_from_page(path, file_name, method_count)
     data = {
         'method_name': get_method_name_from_row(row),
-        'arguments': get_args_from_row(row),
+        'arguments':  get_args_from_row(row),
         'method_type': row.split(' ')[0].lower().strip(),
         'method_path': get_method_path_from_row(row),
-        'params': params
+        'params': [] # params
     }
     return render_from_template('./jinja2', 'access_methods.jinja', **data)
 
