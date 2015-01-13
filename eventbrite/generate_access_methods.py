@@ -4,6 +4,7 @@ import glob
 import os
 import re
 
+import bs4
 import click
 from jinja2 import FileSystemLoader, Environment
 
@@ -16,49 +17,56 @@ def generate_access_methods(path):
     with work_in(path):
         all_methods = []
         docstrings = []
-        for file_name in glob.glob('*.rst'):
-            with open(file_name) as f:
-                rows = f.readlines()
+        with click.progressbar(glob.glob('*.rst')) as file_names:
+            for file_name in file_names:
+                with open(file_name) as f:
+                    rows = f.readlines()
 
-            methods = []
-            internal = False
-            docstring = []
-            docstring = ""
-            block = False
-            for idx, row in enumerate(rows):
+                methods = []
+                internal = False
+                docstring = []
+                docstring = ""
+                block = False
+                for idx, row in enumerate(rows):
 
-                # Hide internal methods
-                if row.startswith('.. start-internal'):
-                    internal = True
-                    continue
-                if row.endswith('.. end-internal'):
-                    internal = False
-                    continue
-                if internal:
-                    continue
+                    # Hide internal methods
+                    if row.startswith('.. start-internal'):
+                        internal = True
+                        continue
+                    if row.startswith('.. end-internal'):
+                        internal = False
+                        continue
+                    if internal:
+                        continue
 
-                # create methods
-                if row.startswith(('GET', 'POST', 'DELETE')):
-                    methods.append(create_method_from_row(row))
-                    block = True
-                    if docstring:
-                        docstring = docstring.replace('\n\n', '\n')
-                        docstrings.append(docstring)
-                    docstring = row
-                    continue
+                    # create methods
+                    if row.startswith(('GET', 'POST', 'DELETE')):
+                        method = create_method_from_row(
+                            row=row,
+                            path=path,
+                            file_name=file_name,
+                            method_count=len(methods) + 1
+                        )
+                        methods.append(method)
+                        block = True
+                        if docstring:
+                            docstring = docstring.replace('\n\n', '\n')
+                            docstrings.append(docstring)
+                        docstring = row
+                        continue
 
-                # Skip some formatting
-                if row.startswith(('------', '.. ebapiview')):
-                    continue
+                    # Skip some formatting
+                    if row.startswith(('------', '.. ebapiview')):
+                        continue
 
-                # Only add docstrings once methods begin to be descripted
-                if block:
-                    docstring += make_docstring_from_row(row)
+                    # Only add docstrings once methods begin to be descripted
+                    if block:
+                        docstring += make_docstring_from_row(row)
 
-            # Add last docstring for a file
-            docstrings.append(docstring)
-            # Add methods for file to the list of all methods
-            all_methods += methods
+                # Add last docstring for a file
+                docstrings.append(docstring)
+                # Add methods for file to the list of all methods
+                all_methods += methods
 
     # Remove any empty docstrings
     docstrings = [x for x in docstrings if len(x.strip())]
@@ -71,6 +79,7 @@ def generate_access_methods(path):
         base = render_from_template('./jinja2', 'access_methods_base.jinja', **data)
         f.write(base)
         for method, docstring in contents:
+            docstring = docstring.replace('\n\n        :param', '\n        :param')
             method = method.replace("**docstring**", docstring)
             f.write('\n')
             f.write(method)
@@ -78,10 +87,14 @@ def generate_access_methods(path):
 
 def make_docstring_from_row(row):
     docstring = row.strip()
-    if re.match(r"(\w|\*|\.|\`|\|\:')", docstring):
+    if re.match(r'\w+', docstring) or \
+        docstring.startswith(('w', '*', '.', '`', ':', "'", '(')):
         docstring = "        " + docstring
-        # docstring = "{0: >8}".format(docstring)
-    return '\n' + docstring
+    # if ':param' in docstring:
+    #     docstring = '\n{0}'.format(docstring)
+    # if docstring.strip().endswith('.'):
+    #     docstring = '{0}\n'.format(docstring)
+    return '\n{0}'.format(docstring)
 
 
 @contextlib.contextmanager
@@ -100,11 +113,24 @@ def work_in(dirname=None):
 
 
 def get_method_name_from_row(row):
+    print row
+    row = row.strip()
+    if row.endswith(':id/'):
+        row = row.replace(':id', 'by/id')
+        row = row.replace("categories", "category")
+        row = row.replace("events", "event")
+        row = row.replace("orders", "order")
+        row = row.replace("users", "user")
+        row = row.replace("webhooks", "webhook")
+    else:
+        row = row.replace("format", "formats")
     elements = row.split('/')
     prefix = elements[0].strip().lower()
     method_pieces = [x.strip() for x in elements[1:] if not x.startswith(':')]
     method_pieces = [x for x in method_pieces if len(x)]
     method_pieces.insert(0, prefix)
+    # TODO: Handle non plural methods better
+    print method_pieces
     return '_'.join(method_pieces)
 
 
@@ -128,13 +154,46 @@ def get_method_path_from_row(row):
     return "/" + os.path.join(*method_path_list)
 
 
-def create_method_from_row(row):
-    # POST /users/:id/contact_lists/:contact_list_id/contacts/
+def get_params_from_page(path, file_name, method_count):
+    """ This function accesses the rendered content.
+        We must do this because how the params are not defined in the docs,
+            but rather the rendered HTML
+    """
+    # open the rendered file. 
+    file_name = file_name.replace(".rst", "")
+    file_path = "{0}/../_build/html/endpoints/{1}/index.html".format(path, file_name)
+    soup = bs4.BeautifulSoup(open(file_path))
+
+    # Pull out the relevant section
+    section = soup.find_all('div', class_='section')[method_count]
+
+    # get the tbody of the params table
+    tbody = section.find('tbody')
+    params = []
+    if tbody is not None:
+        for row in tbody.find_all('tr'):
+            name, param_type, required, description = row.find_all('td')
+            required = required.text == 'Yes'
+            param = dict(
+                name=name.text,
+                type=param_type.text,
+                required=required,
+                description=description.text
+            )
+            params.append(param)
+    params = sorted(params, key=lambda k: not k['required'])
+    return params
+
+
+def create_method_from_row(row, path, file_name, method_count):
+    # POST /users/:id/contact_lists/:contact_list_id/contacts
+    params = get_params_from_page(path, file_name, method_count)
     data = {
         'method_name': get_method_name_from_row(row),
         'arguments': get_args_from_row(row),
         'method_type': row.split(' ')[0].lower().strip(),
         'method_path': get_method_path_from_row(row),
+        'params': params
     }
     return render_from_template('./jinja2', 'access_methods.jinja', **data)
 

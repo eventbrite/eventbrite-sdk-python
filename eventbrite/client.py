@@ -94,9 +94,9 @@ class Eventbrite(AccessMethodsMixin):
         .. note:: A datetime represented as a string in ISO8601 combined date and time format, always in UTC.
         """
         if user_id:
-            url = '/users/{0}/'.format(user_id)
+            url = '/users/{0}/orders/'.format(user_id)
         else:
-            url = '/users/me/'
+            url = '/users/me/orders/'
 
         data = {}
         if changed_since:
