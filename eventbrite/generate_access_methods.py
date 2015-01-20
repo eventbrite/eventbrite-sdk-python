@@ -112,7 +112,6 @@ def work_in(dirname=None):
     finally:
         os.chdir(curdir)
 
-
 def get_method_name_from_row(row):
     row = row.strip()
     if row.endswith(':id/') or row.endswith('_id/'):
@@ -135,7 +134,12 @@ def get_method_name_from_row(row):
     method_pieces = [x.strip() for x in elements[1:] if not x.startswith(':')]
     method_pieces = [x for x in method_pieces if len(x)]
     method_pieces.insert(0, prefix)
-    # TODO: Handle non plural methods better
+
+    if len(method_pieces) > 2:
+        # fix stuff broken from the first pass
+        method_pieces[1] = method_pieces[1].replace("events", "event")
+        method_pieces[1] = method_pieces[1].replace("users", "user")
+
     return '_'.join(method_pieces)
 
 

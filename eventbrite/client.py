@@ -103,17 +103,6 @@ class Eventbrite(AccessMethodsMixin):
             data['changed_since'] = changed_since
         return self.get(url, data=data)
 
-    def get_order(self, order_id):
-        """
-        GET /orders/:id/
-        """
-        return self.get("/orders/{0}/".format(order_id))
-
-    def get_event(self, event_id):
-        """
-        GET /events/:id/
-        """
-        return self.get("/events/{0}/".format(event_id))
 
     def get_event_attendees(self, event_id, status=None, changed_since=None):
         """
