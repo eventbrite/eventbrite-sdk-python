@@ -28,7 +28,6 @@ def generate_access_methods(path):
                 docstring = ""
                 block = False
                 for idx, row in enumerate(rows):
-
                     # Hide internal methods
                     if row.startswith('.. start-internal'):
                         internal = True
@@ -116,11 +115,17 @@ def work_in(dirname=None):
 
 def get_method_name_from_row(row):
     row = row.strip()
-    if row.endswith(':id/'):
-        row = row.replace(':id', 'by/id')
+    if row.endswith(':id/') or row.endswith('_id/'):
+        row = row.replace(':id', '')
+        row = row.replace("attendees", "attendee")
         row = row.replace("categories", "category")
+        row = row.replace("classes", "class")
+        row = row.replace("codes", "code")
+        row = row.replace("contact_lists", "contact_list")
+        row = row.replace("contacts", "contact")
         row = row.replace("events", "event")
         row = row.replace("orders", "order")
+        row = row.replace("organizers", "organizers")
         row = row.replace("users", "user")
         row = row.replace("webhooks", "webhook")
     else:
