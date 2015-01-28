@@ -177,7 +177,7 @@ class Eventbrite(AccessMethodsMixin):
         """
         Converts JSON sent by an Eventbrite Webhook to the appropriate Eventbrite object.
 
-        # TODO - Add capability to handle Django equest objects
+        # TODO - Add capability to handle Django request objects
         """
         if isinstance(webhook, string_type):
             # If still JSON, convert to a Python dict

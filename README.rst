@@ -14,6 +14,19 @@ eventbrite-sdk-python
 
 * Official Eventbrite_ SDK for Python
 * Free software: Apache 2 license
+* Full Documentation: http://eventbrite-sdk-python.readthedocs.org/
+* API Reference: https://developer.eventbrite.com/docs/
+
+Installation from PyPI
+----------------------
+
+::
+
+    $ pip install eventbrite
+
+If you need to, you can also use `easy_install`::
+
+    $ easy_install eventbrite
 
 Usage
 --------
