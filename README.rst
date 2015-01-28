@@ -68,19 +68,3 @@ API objects using the `webhook_to_object()` method:
 
 .. _requests: https://pypi.python.org/pypi/requests
 .. _Eventbrite: https://www.eventbrite.com
-
-
-TODOS
---------
-
-Abstract the HTTP calls so they can work with all of the below:
-
-* requests
-* Google's HTTP client
-* Tornado
-
-Calling different HTTP libraries::
-
-    Eventbrite(OAUTH_TOKEN, "requests")
-    Eventbrite(OAUTH_TOKEN, "google")
-    Eventbrite(OAUTH_TOKEN, "tornado")
