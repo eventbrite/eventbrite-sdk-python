@@ -12,10 +12,8 @@ eventbrite-sdk-python
         :target: https://pypi.python.org/pypi/eventbrite
 
 
-Official Eventbrite_ SDK for Python
-
+* Official Eventbrite_ SDK for Python
 * Free software: Apache 2 license
-* Documentation: https://eventbrite.readthedocs.org.
 
 Usage
 --------
