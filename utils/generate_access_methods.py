@@ -10,8 +10,11 @@ from jinja2 import FileSystemLoader, Environment
 
 API_DIR = os.path.abspath(__file__).replace('generate_access_methods.py', '')
 
-@click.command()
-@click.option('--path', help='Path to endpoint docs')
+@click.command(help="This generates the access_methods module.")
+@click.option('-p', '--path',
+        help='Path to endpoint docs',
+        type=click.Path(exists=True, file_okay=False)
+    )
 def generate_access_methods(path):
 
     with work_in(path):
@@ -73,7 +76,7 @@ def generate_access_methods(path):
     # Combined all_methods list and docstrings list into tuple pairs
     contents = zip(all_methods, docstrings)
 
-    with open('access_methods.py', 'w') as f:
+    with open("access_methods.py", 'w') as f:
         data = {"now": datetime.datetime.now()}
         base = render_from_template('./jinja2', 'access_methods_base.jinja', **data)
         f.write(base)

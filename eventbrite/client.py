@@ -103,7 +103,6 @@ class Eventbrite(AccessMethodsMixin):
             data['changed_since'] = changed_since
         return self.get(url, data=data)
 
-
     def get_event_attendees(self, event_id, status=None, changed_since=None):
         """
         Returns a paginated response with a key of attendees, containing a list of attendee.
