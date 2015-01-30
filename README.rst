@@ -77,5 +77,14 @@ API objects using the `webhook_to_object()` method:
 
         return ""
 
+Versioning
+----------
+
+Because this client interacts with Eventbrite's third API (a.k.a. APIv3), we are tying our release numbers against it in a modified-semantic system:
+
+* 3.x.x where '3' matches the API version. This will not change until Eventbrite releases a new API version.
+* * x.0.x where '0' is increased any time there is a significant change to the API that possibly breaks backwards compatibility
+* x.x.1 where '1' is increased on any release that does not break backwards comptability (small, new features, enhancements, bugfixes)
+
 .. _requests: https://pypi.python.org/pypi/requests
 .. _Eventbrite: https://www.eventbrite.com
