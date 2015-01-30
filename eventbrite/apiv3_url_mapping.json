@@ -9,7 +9,7 @@
         "data_type": "serialized",
         "response_type": "single_response",
         "serializer": "Event",
-        "url_regexp": "^events/composite-create/$"
+        "url_regexp": "^events/$"
     },
     {
         "data_type": "serialized",
