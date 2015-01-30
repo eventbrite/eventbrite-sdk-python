@@ -9,6 +9,7 @@ from requests.structures import CaseInsensitiveDict
 
 from eventbrite import Eventbrite
 from eventbrite.models import EventbriteObject
+from eventbrite.utils import EVENTBRITE_API_URL
 
 from ..base import unittest
 
@@ -40,7 +41,7 @@ class TestClient(unittest.TestCase):
 
         self.assertEqual(
             payload.resource_uri,
-            "https://www.eventbriteapi.com/v3/users/me/"
+            EVENTBRITE_API_URL + 'users/me/'
         )
 
         self.assertTrue(payload.ok)
@@ -93,7 +94,7 @@ class TestClientAccessMethods(unittest.TestCase):
     @unittest.skipIf(condition=skip_integration_tests, reason='Needs an OAUTH_TOKEN')
     def test_webhook_no_internet(self):
         webhook = {
-            "api_url": "https://www.eventbriteapi.com/v3/users/me/",
+            "api_url": EVENTBRITE_API_URL + 'users/me/',
             "config": {
                 "endpoint_url": "https://myawesomeapp.com/webhook",
                 "insecure_ssl": "0"

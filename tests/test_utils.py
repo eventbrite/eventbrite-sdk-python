@@ -12,7 +12,8 @@ import json
 from eventbrite.exceptions import InvalidResourcePath
 from eventbrite.utils import (
     format_path,
-    get_webhook_from_request
+    get_webhook_from_request,
+    EVENTBRITE_API_URL
 )
 
 from .base import unittest, mock
@@ -37,9 +38,7 @@ class TestFormatPath(unittest.TestCase):
 
     def test_formatted_path(self):
         path = format_path('/users/me')
-
-        self.assertEqual(path, "https://www.eventbriteapi.com/v3/users/me")
-
+        self.assertEqual(path, EVENTBRITE_API_URL + 'users/me')
 
     def test_get_webhook_request(self):
         # Construct our mock Flask request
@@ -53,7 +52,7 @@ class TestFormatPath(unittest.TestCase):
         }
         request.get_json = lambda: data
 
-        # Test to see if the data can be fetche correctly
+        # Test to see if the data can be fetched correctly
         request_data = get_webhook_from_request(request)
         self.assertEqual(data, request_data)
 
