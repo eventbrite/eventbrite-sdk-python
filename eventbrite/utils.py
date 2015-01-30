@@ -33,9 +33,10 @@ def get_mapping(_compiled_mapping=[]):
         raise  # TODO: do we handle it here?
 
 
-def reverse(path_or_url, only_serialized=False):
+def reverse(path_or_url, only_serialized=False, eventbrite_api_url=EVENTBRITE_API_URL):
     """Look up data types returned by API endpoint for specific url/path
     """
+    EVENTBRITE_API_PATH = urlparse(eventbrite_api_url).path
     parsed_url = urlparse(path_or_url)
     path = parsed_url.path
     if not path.startswith(EVENTBRITE_API_PATH):
@@ -54,17 +55,17 @@ def reverse(path_or_url, only_serialized=False):
     raise UnknownEndpoint(path)
 
 
-def format_path(path):
+def format_path(path, eventbrite_api_url=EVENTBRITE_API_URL):
     error_msg = "The path argument must be a string that begins with '/'"
     if not isinstance(path, string_type):
         raise InvalidResourcePath(error_msg)
     # Probably a webhook path
-    if path.startswith(EVENTBRITE_API_URL):
+    if path.startswith(eventbrite_api_url):
         return path
 
     # Using the HTTP shortcut
     if path.startswith("/"):
-        return urljoin(EVENTBRITE_API_URL, path.lstrip('/'))
+        return urljoin(eventbrite_api_url, path.lstrip('/'))
     raise InvalidResourcePath(error_msg)
 
 

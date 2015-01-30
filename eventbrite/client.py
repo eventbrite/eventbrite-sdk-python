@@ -9,12 +9,15 @@ from .compat import json, string_type
 from .decorators import objectify
 from .exceptions import (
     IllegalHttpMethod,
-    InvalidWebhook
+    InvalidWebhook,
+    InternetConnectionError
 )
+from .models import EventbriteObject
 from .utils import (
     format_path,
     construct_namespaced_dict,
-    get_webhook_from_request
+    get_webhook_from_request,
+    EVENTBRITE_API_URL
 )
 from . import _version
 
@@ -22,6 +25,7 @@ from . import _version
 class Eventbrite(AccessMethodsMixin):
 
     allowed_methods = ['post', 'get', 'delete']
+    eventbrite_api_url = EVENTBRITE_API_URL
 
     def __init__(self, oauth_token):
         self.oauth_token = oauth_token
@@ -48,17 +52,17 @@ class Eventbrite(AccessMethodsMixin):
 
     @objectify
     def get(self, path, data=None, expansions=()):
-        path = format_path(path)
+        path = format_path(path, self.eventbrite_api_url)
         return requests.get(path, headers=self.headers, params=data or {})
 
     @objectify
     def post(self, path, data=None, expansions=()):
-        path = format_path(path)
+        path = format_path(path, self.eventbrite_api_url)
         return requests.post(path, headers=self.headers, data=data or {})
 
     @objectify
     def delete(self, path, data=None, expansions=()):
-        path = format_path(path)
+        path = format_path(path, self.eventbrite_api_url)
         return requests.delete(path, headers=self.headers, data=data or {})
 
     ############################

@@ -5,6 +5,7 @@ from datetime import timedelta
 
 from eventbrite.compat import PY3
 from eventbrite.models import EventbriteObject
+from eventbrite.utils import EVENTBRITE_API_URL
 
 from requests.structures import CaseInsensitiveDict
 
@@ -24,7 +25,7 @@ class TestEventbriteObject(unittest.TestCase):
         self.response.reason = u"OK"
         self.response.status_code = 200
 
-        self.evbobject = EventbriteObject.create(self.response)
+        self.evbobject = EventbriteObject.create(self.response, EVENTBRITE_API_URL)
 
     def test_create_from_payload(self):
 

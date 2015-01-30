@@ -91,6 +91,17 @@ Ready to contribute? Here's how to set up `eventbrite` for local development.
 
 7. Submit a pull request through the GitHub website.
 
+Adding Environment Variables
+------------------------------
+
+In order to run the full test suite, you will need your USER_ID and OAUTH token from Eventbrite added as environment variables.
+
+In your ``.bash_profile`` add::
+
+    # Eventbrite envariables variables
+    EVENTBRITE_USER_ID=XXXXXXXX
+    EVENTBRITE_OAUTH_TOKEN=XXXXXXXX
+
 Pull Request Guidelines
 -----------------------
 

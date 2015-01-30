@@ -14,9 +14,12 @@ def objectify(func):
 
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
+        # we know the first argument is 'self'
+        self = args[0]
         try:
             payload = func(*args, **kwargs)
         except requests.exceptions.ConnectionError as e:
             raise InternetConnectionError(e)
-        return EventbriteObject.create(payload)
+        return EventbriteObject.create(payload, self.eventbrite_api_url)
     return wrapper
+

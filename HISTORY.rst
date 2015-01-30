@@ -3,6 +3,11 @@
 History
 -------
 
+3.0.2 (2014-01-30)
+------------------
+
+* Added feature allowing the use of Eventbrite API url at test servers. Should help expedite development of tricky post actions.
+
 
 3.0.1 (2014-01-30)
 ------------------

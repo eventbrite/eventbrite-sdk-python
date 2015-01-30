@@ -42,7 +42,7 @@ setup(
     long_description=readme + '\n\n' + history,
     author='Daniel Greenfeld, Bartek Ogryczak',
     author_email='danny@eventbrite.com',
-    url='https://github.com/pydanny/eventbrite',
+    url='https://github.com/eventbrite/eventbrite-sdk-python',
     packages=[
         'eventbrite',
     ],

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from datetime import timedelta
+from datetime import timedelta, datetime
 import os
 
 from requests.structures import CaseInsensitiveDict
@@ -13,13 +13,13 @@ from eventbrite.models import EventbriteObject
 from ..base import unittest
 
 try:
-    OAUTH_TOKEN = os.environ[u'OAUTH_TOKEN']
+    OAUTH_TOKEN = os.environ[u'EVENTBRITE_OAUTH_TOKEN']
     skip_integration_tests = False
 except KeyError:
     skip_integration_tests = True
 
 try:
-    USER_ID = os.environ[u'USER_ID']
+    USER_ID = os.environ[u'EVENTBRITE_USER_ID']
     skip_user_id_tests = False
 except KeyError:
     skip_user_id_tests = True
@@ -101,6 +101,39 @@ class TestClientAccessMethods(unittest.TestCase):
         }
         evbobject = self.eventbrite.webhook_to_object(webhook)
         self.assertTrue('id' in evbobject)
+
+    @unittest.skipIf(condition=skip_user_id_tests, reason='Needs a USER_ID')
+    @unittest.skipIf(condition=skip_integration_tests, reason='Needs an OAUTH_TOKEN')
+    def test_post_event(self):
+
+        user = self.eventbrite.get_user()
+        event = {
+          'name': {
+            'html': 'client_test_{0}'.format(datetime.now()),
+          },
+          'organizer_id': user['id'],
+          'start': {
+            'utc': '2015-03-07T20:00:00Z',
+            'timezone': 'America/Los_Angeles',
+          },
+          'end': {
+            'utc': '2015-03-07T23:00:00Z',
+            'timezone': 'America/Los_Angeles',
+          },
+          'currency': 'USD',
+          'venue_id': '9053805',
+          'online_event': False,
+          'listed': False,
+          'category_id': '110',
+          'format_id': '5',
+          'password': "test",
+          'capacity': 10,
+          #'description': {
+          #  'html': 'html description',
+          #},
+        }
+        response = self.eventbrite.post('/events/', data=event)
+
 
 
 if __name__ == '__main__':
