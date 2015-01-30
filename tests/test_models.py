@@ -25,7 +25,7 @@ class TestEventbriteObject(unittest.TestCase):
         self.response.reason = u"OK"
         self.response.status_code = 200
 
-        self.evbobject = EventbriteObject.create(self.response, EVENTBRITE_API_URL)
+        self.evbobject = EventbriteObject.create(self.response)
 
     def test_create_from_payload(self):
 

@@ -13,7 +13,7 @@ class EventbriteObject(dict):
     pk = None
 
     @classmethod
-    def create(cls, response, eventbrite_api_url):
+    def create(cls, response):
         data = response.json()
         evbobject = cls(data)
         evbobject.resource_uri = response.url
@@ -22,7 +22,7 @@ class EventbriteObject(dict):
         evbobject.headers = response.headers
         evbobject.reason = response.reason
         evbobject.status_code = response.status_code
-        api_data_type = reverse(evbobject.resource_uri, eventbrite_api_url)
+        api_data_type = reverse(evbobject.resource_uri)
         # TODO: figure out what to do with enpoint, which don't have defined serializer
         # TODO: solve issue with non-standard serializes not mapping directly to defined objects
         evbobject.type = api_data_type.get("serializer", "")

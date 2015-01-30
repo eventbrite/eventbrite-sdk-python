@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from os import environ
 import os.path
 import re
 
@@ -14,7 +15,7 @@ from .exceptions import (
     UnsupportedEndpoint,
 )
 
-EVENTBRITE_API_URL = 'https://www.eventbriteapi.com/v3/'
+EVENTBRITE_API_URL = environ.get('EVENTBRITE_API_URL', 'https://www.eventbriteapi.com/v3/')
 EVENTBRITE_API_PATH = urlparse(EVENTBRITE_API_URL).path
 
 URL_MAP_FILE = os.path.join(os.path.dirname(__file__), "apiv3_url_mapping.json")
@@ -33,10 +34,9 @@ def get_mapping(_compiled_mapping=[]):
         raise  # TODO: do we handle it here?
 
 
-def reverse(path_or_url, only_serialized=False, eventbrite_api_url=EVENTBRITE_API_URL):
+def reverse(path_or_url, only_serialized=False):
     """Look up data types returned by API endpoint for specific url/path
     """
-    EVENTBRITE_API_PATH = urlparse(eventbrite_api_url).path
     parsed_url = urlparse(path_or_url)
     path = parsed_url.path
     if not path.startswith(EVENTBRITE_API_PATH):
