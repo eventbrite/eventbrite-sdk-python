@@ -38,18 +38,6 @@
     {
         "data_type": "serialized",
         "response_type": "single_response",
-        "serializer": "Order",
-        "url_regexp": "^events/(?P<event_id>\\d+)/orders/(?P<order_id>\\d+)/refunds/$"
-    },
-    {
-        "data_type": "serialized",
-        "response_type": "single_response",
-        "serializer": "Order",
-        "url_regexp": "^events/(?P<event_id>\\d+)/orders/(?P<order_id>\\d+)/itemized_refunds/$"
-    },
-    {
-        "data_type": "serialized",
-        "response_type": "single_response",
         "serializer": "TicketClass",
         "url_regexp": "^events/(?P<event_id>\\d+)/ticket_classes/$"
     },
@@ -118,6 +106,12 @@
         "response_type": "paginated_response",
         "serializer": "TicketClass",
         "url_regexp": "^events/(?P<event_id>\\d+)/ticket_classes/for_sale/$"
+    },
+    {
+        "data_type": "serialized",
+        "response_type": "single_response",
+        "serializer": "TicketClass",
+        "url_regexp": "^events/(?P<event_id>\\d+)/ticket_classes/(?P<ticket_class_id>\\d+)/$"
     },
     {
         "data_type": "serialized",
