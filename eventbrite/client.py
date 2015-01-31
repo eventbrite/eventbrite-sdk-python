@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import json
 from platform import platform
 
 import requests
@@ -58,11 +59,13 @@ class Eventbrite(AccessMethodsMixin):
     @objectify
     def post(self, path, data=None, expansions=()):
         path = format_path(path, self.eventbrite_api_url)
-        return requests.post(path, headers=self.headers, data=data or {})
+        json_data = json.dumps(data or {})
+        return requests.post(path, headers=self.headers, data=json_data)
 
     @objectify
     def delete(self, path, data=None, expansions=()):
         path = format_path(path, self.eventbrite_api_url)
+        json_data = json.dumps(data or {})
         return requests.delete(path, headers=self.headers, data=data or {})
 
     ############################
@@ -148,7 +151,7 @@ class Eventbrite(AccessMethodsMixin):
         """
         return self.get("/events/{0}/discounts/".format(event_id))
 
-    def create_event_discount(self, event_id,
+    def post_event_discount(self, event_id,
                               discount_code,
                               discount_amount_off=None,
                               discount_percent_off=None,
@@ -166,9 +169,10 @@ class Eventbrite(AccessMethodsMixin):
             discount_quantity_available integer     optional    Number of discount uses
             discount_start_date         datetime    optional    Allow use from this date
             discount_end_date           datetime    optional    Allow use until this date
+
+            TODO: Consider deprecating this method
         """
         data = construct_namespaced_dict("discount", locals())
-        return data
         return self.post("/events/{0}/discounts/".format(event_id), data=data)
 
     def get_event_discount_by_id(self, event_id, discount_id):
@@ -176,6 +180,11 @@ class Eventbrite(AccessMethodsMixin):
         GET /events/:id/discounts/:id/
         """
         return self.get("/events/{0}/discounts/{1}/".format(event_id, discount_id))
+
+    def post_event(self, data):
+
+        return self.post("/events/", data=data)
+
 
     def webhook_to_object(self, webhook):
         """
