@@ -8,7 +8,8 @@ try:
 except ImportError:
     from distutils.core import setup
 
-from eventbrite import __version__
+sys.path.append('./eventbrite')
+from _version import __version__
 
 version = __version__
 
