@@ -8,9 +8,7 @@ try:
 except ImportError:
     from distutils.core import setup
 
-from eventbrite import __version__
-
-version = __version__
+__version__ = '3.0.3'
 
 if sys.argv[-1] == 'tag':
     os.system("git tag -a %s -m 'version %s'" % (version, version))
@@ -55,6 +53,8 @@ setup(
     keywords='eventbrite',
     classifiers=[
         'Development Status :: 4 - Beta',
+        'Framework :: Django',
+        'Framework :: Flask',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Apache Software License',
         'Natural Language :: English',

@@ -74,7 +74,6 @@ class AccessMethodsMixin(object):
 
         
         """
-        
         return self.get("/events/{0}/".format(id), data=data)
 
     def get_event_ticket_classes(self, id,  **data):

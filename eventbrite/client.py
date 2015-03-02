@@ -13,6 +13,7 @@ from .exceptions import (
     InvalidWebhook,
     InternetConnectionError
 )
+from . import __version__
 from .models import EventbriteObject
 from .utils import (
     format_path,
@@ -20,7 +21,6 @@ from .utils import (
     get_webhook_from_request,
     EVENTBRITE_API_URL
 )
-from . import _version
 
 
 class Eventbrite(AccessMethodsMixin):
@@ -37,7 +37,7 @@ class Eventbrite(AccessMethodsMixin):
             "Authorization": "Bearer {0}".format(self.oauth_token),
             "content-type": "application/json",
             "User-Agent": "eventbrite-python-sdk {version} ({system})".format(
-                version=_version.__version__,
+                version=__version__,
                 system=platform(),
             )
         }
