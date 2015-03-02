@@ -7,7 +7,6 @@ History
 ------------------
 
 * Fixed import issue with ``__version__``. Thank you @meshy  and @longjos for identifying the problem.
-* 
 
 3.0.2 (2014-01-30)
 ------------------
