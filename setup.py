@@ -35,7 +35,7 @@ if sys.version_info[:2] < (2, 7):
 
 setup(
     name='eventbrite',
-    version=version,
+    version=__version__,
     description='Official Eventbrite SDK for Python',
     long_description=readme + '\n\n' + history,
     author='Daniel Greenfeld, Bartek Ogryczak',
