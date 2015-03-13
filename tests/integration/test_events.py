@@ -61,6 +61,17 @@ class TestEvents(unittest.TestCase):
         # Just for access to see the event, not full authentication
         self.assertEqual(event['password'], "test")
 
+    @unittest.skipIf(condition=skip_user_id_tests, reason='Needs a USER_ID')
+    @unittest.skipIf(condition=skip_integration_tests, reason='Needs an OAUTH_TOKEN')
+    def test_search_events(self):
+        data = {
+          'location.latitude':'40.4313684',
+          'start_date.keyword':'today',
+          'location.longitude':'-79.9805005',
+          'location.within':'10km'
+        }
+        events = self.eventbrite.event_search(**data)
+        self.assertLess(events['pagination'][u'object_count'], 1000)
 
 if __name__ == '__main__':
     unittest.main()

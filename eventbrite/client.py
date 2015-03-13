@@ -27,20 +27,24 @@ class Eventbrite(AccessMethodsMixin):
 
     allowed_methods = ['post', 'get', 'delete']
     eventbrite_api_url = EVENTBRITE_API_URL
+    content_type_specified = True
 
     def __init__(self, oauth_token):
         self.oauth_token = oauth_token
 
     @property
     def headers(self):
-        return {
+        headers = {
             "Authorization": "Bearer {0}".format(self.oauth_token),
-            "content-type": "application/json",
             "User-Agent": "eventbrite-python-sdk {version} ({system})".format(
                 version=__version__,
                 system=platform(),
             )
         }
+        # Resolves the search result response problem
+        if self.content_type_specified:
+            headers["content-type"] = "application/json"
+        return headers
 
     def api(self, method, path, data, expansions=()):
         method = method.strip().lower()
@@ -185,6 +189,10 @@ class Eventbrite(AccessMethodsMixin):
 
         return self.post("/events/", data=data)
 
+    def event_search(self, **data):
+        # Resolves the search result response problem
+        self.content_type_specified = False
+        return self.get("/events/search/", data=data)
 
     def webhook_to_object(self, webhook):
         """
@@ -208,3 +216,5 @@ class Eventbrite(AccessMethodsMixin):
         payload = self.get(webhook['api_url'])
 
         return payload
+
+
