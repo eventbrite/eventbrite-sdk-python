@@ -3,6 +3,12 @@
 History
 -------
 
+3.0.4 (2014-03-12)
+------------------
+
+* Resolved the search result response problem where filtering did not work.
+
+
 3.0.3 (2014-03-02)
 ------------------
 
