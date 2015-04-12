@@ -58,7 +58,11 @@ class Eventbrite(AccessMethodsMixin):
     @objectify
     def get(self, path, data=None, expansions=()):
         path = format_path(path, self.eventbrite_api_url)
-        return requests.get(path, headers=self.headers, params=data or {})
+        # Resolves the search result response problem
+        self.content_type_specified = False
+        response = requests.get(path, headers=self.headers, params=data or {})
+        self.content_type_specified = True
+        return response
 
     @objectify
     def post(self, path, data=None, expansions=()):
@@ -70,7 +74,11 @@ class Eventbrite(AccessMethodsMixin):
     def delete(self, path, data=None, expansions=()):
         path = format_path(path, self.eventbrite_api_url)
         json_data = json.dumps(data or {})
-        return requests.delete(path, headers=self.headers, data=data or {})
+        self.content_type_specified = False
+        response = requests.delete(path, headers=self.headers, data=data or {})
+        self.content_type_specified = True
+        return response
+
 
     ############################
     #
@@ -190,8 +198,6 @@ class Eventbrite(AccessMethodsMixin):
         return self.post("/events/", data=data)
 
     def event_search(self, **data):
-        # Resolves the search result response problem
-        self.content_type_specified = False
         return self.get("/events/search/", data=data)
 
     def webhook_to_object(self, webhook):
