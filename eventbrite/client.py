@@ -35,15 +35,13 @@ class Eventbrite(AccessMethodsMixin):
     @property
     def headers(self):
         headers = {
+            "content-type": "application/json",
             "Authorization": "Bearer {0}".format(self.oauth_token),
             "User-Agent": "eventbrite-python-sdk {version} ({system})".format(
                 version=__version__,
                 system=platform(),
             )
         }
-        # Resolves the search result response problem
-        if self.content_type_specified:
-            headers["content-type"] = "application/json"
         return headers
 
     def api(self, method, path, data, expansions=()):
@@ -57,9 +55,13 @@ class Eventbrite(AccessMethodsMixin):
 
     @objectify
     def get(self, path, data=None, expansions=()):
-        self.content_type_specified = False
+        # Resolves the search result response problem
+        headers = self.headers
+        if headers.has_key('content-type'):
+            headers.pop('content-type')
+        # Get the function path
         path = format_path(path, self.eventbrite_api_url)
-        return requests.get(path, headers=self.headers, params=data or {})
+        return requests.get(path, headers=headers, params=data or {})
 
     @objectify
     def post(self, path, data=None, expansions=()):
