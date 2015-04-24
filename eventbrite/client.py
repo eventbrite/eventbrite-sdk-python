@@ -57,6 +57,7 @@ class Eventbrite(AccessMethodsMixin):
 
     @objectify
     def get(self, path, data=None, expansions=()):
+        self.content_type_specified = False
         path = format_path(path, self.eventbrite_api_url)
         return requests.get(path, headers=self.headers, params=data or {})
 
@@ -191,7 +192,6 @@ class Eventbrite(AccessMethodsMixin):
 
     def event_search(self, **data):
         # Resolves the search result response problem
-        self.content_type_specified = False
         return self.get("/events/search/", data=data)
 
     def webhook_to_object(self, webhook):

@@ -22,6 +22,7 @@ class EventbriteObject(dict):
         evbobject.headers = response.headers
         evbobject.reason = response.reason
         evbobject.status_code = response.status_code
+        evbobject.request = response.request
         api_data_type = reverse(evbobject.resource_uri)
         # TODO: figure out what to do with endpoint, which doesn't have defined serializer
         # TODO: solve issue with non-standard serializes not mapping directly to defined objects
