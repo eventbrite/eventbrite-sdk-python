@@ -6,7 +6,7 @@ History
 3.0.5 (2014-04-24)
 ------------------
 
-* Removed 'content-type' header from GET requests
+* Removed 'content-type' header from all GET requests
 
 3.0.4 (2014-03-12)
 ------------------
