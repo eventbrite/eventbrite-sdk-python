@@ -3,7 +3,7 @@
 History
 -------
 
-3.1.0 (2014-04-24)
+3.1.0 (2014-05-11)
 ------------------
 
 * Added control over expansion of response. Documentation at http://www.eventbrite.com/developer/v3/reference/expansions/
