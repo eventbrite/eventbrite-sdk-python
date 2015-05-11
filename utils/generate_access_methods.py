@@ -10,11 +10,12 @@ from jinja2 import FileSystemLoader, Environment
 
 API_DIR = os.path.abspath(__file__).replace('generate_access_methods.py', '')
 
+
 @click.command(help="This generates the access_methods module.")
-@click.option('-p', '--path',
-        help='Path to endpoint docs',
-        type=click.Path(exists=True, file_okay=False)
-    )
+@click.option(
+    '-p', '--path',
+    help='Path to endpoint docs',
+    type=click.Path(exists=True, file_okay=False))
 def generate_access_methods(path):
 
     with work_in(path):
@@ -78,12 +79,13 @@ def generate_access_methods(path):
 
     with open("access_methods.py", 'w') as f:
         data = {"now": datetime.datetime.now()}
-        base = render_from_template('./jinja2', 'access_methods_base.jinja', **data)
+        base = render_from_template(
+            './jinja2', 'access_methods_base.jinja', **data)
         f.write(base)
         for method, docstring in contents:
             docstring = docstring.replace('\n\n\n', '\n')
             docstring = docstring.replace('\n\n', '\n')
-            docstring = docstring.replace('\n\n        :param', '\n        :param')
+            docstring = docstring.replace('\n\n        :param', '\n        :param')  # noqa
             method = method.replace("**docstring**", docstring)
             f.write('\n')
             f.write(method)
@@ -91,8 +93,8 @@ def generate_access_methods(path):
 
 def make_docstring_from_row(row):
     docstring = row.strip()
-    if re.match(r'\w+', docstring) or \
-        docstring.startswith(('w', '*', '.', '`', ':', "'", '(')):
+    punctuation = ('w', '*', '.', '`', ':', "'", '(')
+    if re.match(r'\w+', docstring) or docstring.startswith(punctuation):
         docstring = "        " + docstring
     # if ':param' in docstring:
     #     docstring = '\n{0}'.format(docstring)
@@ -114,6 +116,7 @@ def work_in(dirname=None):
         yield
     finally:
         os.chdir(curdir)
+
 
 def get_method_name_from_row(row):
     row = row.strip()
@@ -171,9 +174,10 @@ def get_params_from_page(path, file_name, method_count):
         We must do this because how the params are not defined in the docs,
             but rather the rendered HTML
     """
-    # open the rendered file. 
+    # open the rendered file.
     file_name = file_name.replace(".rst", "")
-    file_path = "{0}/../_build/html/endpoints/{1}/index.html".format(path, file_name)
+    file_path = "{0}/../_build/html/endpoints/{1}/index.html".format(
+        path, file_name)
     soup = bs4.BeautifulSoup(open(file_path))
 
     # Pull out the relevant section
@@ -199,13 +203,13 @@ def get_params_from_page(path, file_name, method_count):
 
 def create_method_from_row(row, path, file_name, method_count):
     # POST /users/:id/contact_lists/:contact_list_id/contacts
-    params = get_params_from_page(path, file_name, method_count)
+    # params = get_params_from_page(path, file_name, method_count)
     data = {
         'method_name': get_method_name_from_row(row),
         'arguments':  get_args_from_row(row),
         'method_type': row.split(' ')[0].lower().strip(),
         'method_path': get_method_path_from_row(row),
-        'params': [] # params
+        'params': []  # params
     }
     return render_from_template('./jinja2', 'access_methods.jinja', **data)
 
@@ -220,4 +224,3 @@ def render_from_template(directory, template_name, **kwargs):
 
 if __name__ == '__main__':
     generate_access_methods()
-

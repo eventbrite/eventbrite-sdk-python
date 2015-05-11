@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from datetime import timedelta, datetime
+from datetime import timedelta
 import os
 
 from requests.structures import CaseInsensitiveDict
@@ -28,7 +28,9 @@ except KeyError:
 
 class TestClient(unittest.TestCase):
 
-    @unittest.skipIf(condition=skip_integration_tests, reason='Needs an OAUTH_TOKEN')
+    @unittest.skipIf(
+        condition=skip_integration_tests,
+        reason='Needs an OAUTH_TOKEN')
     def test_api_get(self):
         eventbrite = Eventbrite(OAUTH_TOKEN)
 
@@ -52,11 +54,15 @@ class TestClient(unittest.TestCase):
             'content-type' in payload.request.headers
         )
 
-    @unittest.skipIf(condition=skip_integration_tests, reason='Needs an OAUTH_TOKEN')
+    @unittest.skipIf(
+        condition=skip_integration_tests,
+        reason='Needs an OAUTH_TOKEN')
     def test_api_post(self):
         pass  # TODO
 
-    @unittest.skipIf(condition=skip_integration_tests, reason='Needs an OAUTH_TOKEN')
+    @unittest.skipIf(
+        condition=skip_integration_tests,
+        reason='Needs an OAUTH_TOKEN')
     def test_api_delete(self):
         pass  # TODO
 
@@ -66,7 +72,9 @@ class TestClientAccessMethods(unittest.TestCase):
     def setUp(self):
         self.eventbrite = Eventbrite(OAUTH_TOKEN)
 
-    @unittest.skipIf(condition=skip_integration_tests, reason='Needs an OAUTH_TOKEN')
+    @unittest.skipIf(
+        condition=skip_integration_tests,
+        reason='Needs an OAUTH_TOKEN')
     def test_get_user_me(self):
         evbobject = self.eventbrite.get_user()
 
@@ -74,7 +82,8 @@ class TestClientAccessMethods(unittest.TestCase):
         self.assertTrue(isinstance(evbobject, EventbriteObject))
 
         # check attributes
-        for attribute in ['id', 'pk', 'type', 'is_paginated', 'is_list', 'status_code']:
+        attrs = ['id', 'pk', 'type', 'is_paginated', 'is_list', 'status_code']
+        for attribute in attrs:
             self.assertTrue(attribute in evbobject.__dict__.keys())
 
         # check that an ID exists
