@@ -53,6 +53,19 @@ You can also specify API endpoints manually:
     >>> user['name']
     Daniel Roy Greenfeld
 
+Expansions_ can be included in a returned GET resource by simply adding the ``expand`` keyword to the calling method:
+
+.. code-block:: python
+
+    >>> event = eventbrite.get_event('my-event-id')
+    >>> 'ticket_classes' in evbobject
+    False
+    >>> event = eventbrite.get_event('my-event-id', expand='ticket_classes')
+    >>> 'ticket_classes' in evbobject
+    True
+
+.. _Expansions: http://www.eventbrite.com/developer/v3/reference/expansions/
+
 Usage with Frameworks
 ----------------------
 
