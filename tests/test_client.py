@@ -4,10 +4,7 @@
 from platform import platform
 
 from eventbrite import __version__
-from eventbrite.exceptions import InvalidResourcePath
 from eventbrite.client import Eventbrite
-
-from .base import unittest, mock
 
 
 def test_headers():

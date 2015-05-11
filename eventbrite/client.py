@@ -44,7 +44,7 @@ class Eventbrite(AccessMethodsMixin):
         }
         return headers
 
-    def api(self, method, path, data, expansions=()):
+    def api(self, method, path, data, expand=()):
         method = method.strip().lower()
         if method not in self.allowed_methods:
             msg = "The '{0}' method is not accepted by the Eventbrite " \
@@ -54,23 +54,37 @@ class Eventbrite(AccessMethodsMixin):
         return method(path, data)
 
     @objectify
-    def get(self, path, data=None, expansions=()):
+    def get(self, path, data=None, expand=()):
         # Resolves the search result response problem
         headers = self.headers
         if headers.has_key('content-type'):
             headers.pop('content-type')
         # Get the function path
         path = format_path(path, self.eventbrite_api_url)
+
+        if data is None:
+            data = {}
+
+        # Manage expansions
+        if data.get('expand'):
+            # Do nothing because expand is already passed in
+            pass
+        elif expand:
+            # Manage expansions
+            data['expand'] = ','.join(expand)
+        else:
+            # Anything else is None
+            data['expand'] = 'none'
         return requests.get(path, headers=headers, params=data or {})
 
     @objectify
-    def post(self, path, data=None, expansions=()):
+    def post(self, path, data=None):
         path = format_path(path, self.eventbrite_api_url)
         json_data = json.dumps(data or {})
         return requests.post(path, headers=self.headers, data=json_data)
 
     @objectify
-    def delete(self, path, data=None, expansions=()):
+    def delete(self, path, data=None):
         path = format_path(path, self.eventbrite_api_url)
         json_data = json.dumps(data or {})
         return requests.delete(path, headers=self.headers, data=data or {})

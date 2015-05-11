@@ -95,6 +95,7 @@ class TestClientAccessMethods(unittest.TestCase):
         # check that the ID's match
         self.assertEqual(evbobject.get('id'), USER_ID)
 
+
     @unittest.skipIf(condition=skip_integration_tests, reason='Needs an OAUTH_TOKEN')
     def test_webhook_no_internet(self):
         webhook = {
@@ -106,3 +107,15 @@ class TestClientAccessMethods(unittest.TestCase):
         }
         evbobject = self.eventbrite.webhook_to_object(webhook)
         self.assertTrue('id' in evbobject)
+
+
+    @unittest.skipIf(condition=skip_user_id_tests, reason='Needs a USER_ID')
+    @unittest.skipIf(condition=skip_integration_tests, reason='Needs an OAUTH_TOKEN')
+    def test_get_event_expansions(self):
+        # Get event with no expansions
+        evbobject = self.eventbrite.get_event('11260994939')
+        self.assertFalse('ticket_classes' in evbobject)
+
+        # Now get event with ticket_classes expansion
+        evbobject = self.eventbrite.get_event('11260994939', expand='ticket_classes')
+        self.assertTrue('ticket_classes' in evbobject)

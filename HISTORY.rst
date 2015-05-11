@@ -3,10 +3,15 @@
 History
 -------
 
+3.1.0 (2014-04-24)
+------------------
+
+* Added control over expansion of response. Documentation at http://www.eventbrite.com/developer/v3/reference/expansions/
+
 3.0.5 (2014-04-24)
 ------------------
 
-* Removed 'content-type' header from all GET requests
+* Removed 'content-type' header from all GET requests. Thank you @xxv for identifying the problem and contributing code.
 
 3.0.4 (2014-03-12)
 ------------------

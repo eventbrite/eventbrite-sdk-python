@@ -16,7 +16,11 @@ class EventbriteObject(dict):
     def create(cls, response):
         data = response.json()
         evbobject = cls(data)
-        evbobject.resource_uri = response.url
+        try:
+            # Strip out URL parameters for resource_uri
+            evbobject.resource_uri = response.url[:response.url.index('?')]
+        except ValueError:
+            evbobject.resource_uri = response.url
         evbobject.ok = response.ok
         evbobject.elapsed = response.elapsed
         evbobject.headers = response.headers

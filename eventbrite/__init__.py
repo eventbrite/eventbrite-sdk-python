@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 __author__ = 'Daniel Greenfeld'
 __email__ = 'danny@eventbrite.com'
-__version__ = '3.0.5'
+__version__ = '3.1.0'
 
 
 from .client import Eventbrite
