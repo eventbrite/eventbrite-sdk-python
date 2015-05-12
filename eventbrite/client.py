@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-import json
 from platform import platform
 
 import requests
@@ -10,11 +9,9 @@ from .compat import json, string_type
 from .decorators import objectify
 from .exceptions import (
     IllegalHttpMethod,
-    InvalidWebhook,
-    InternetConnectionError
+    InvalidWebhook
 )
 from . import __version__
-from .models import EventbriteObject
 from .utils import (
     format_path,
     construct_namespaced_dict,
@@ -57,7 +54,7 @@ class Eventbrite(AccessMethodsMixin):
     def get(self, path, data=None, expand=()):
         # Resolves the search result response problem
         headers = self.headers
-        if headers.has_key('content-type'):
+        if 'content-type' in headers:
             headers.pop('content-type')
         # Get the function path
         path = format_path(path, self.eventbrite_api_url)
@@ -172,24 +169,25 @@ class Eventbrite(AccessMethodsMixin):
         """
         return self.get("/events/{0}/discounts/".format(event_id))
 
-    def post_event_discount(self, event_id,
-                              discount_code,
-                              discount_amount_off=None,
-                              discount_percent_off=None,
-                              discount_ticket_ids=None,
-                              discount_quantity_available=None,
-                              discount_start_date=None,
-                              discount_end_date=None):
+    def post_event_discount(
+            self, event_id,
+            discount_code,
+            discount_amount_off=None,
+            discount_percent_off=None,
+            discount_ticket_ids=None,
+            discount_quantity_available=None,
+            discount_start_date=None,
+            discount_end_date=None):
         """
         POST /events/:id/discounts/
 
-            discount_code               string      required    Code used to activate discount
-            discount_amount_off         unknown     optional    Fixed reduction amount
-            discount_percent_off        string      optional    Percentage reduction
-            discount_ticket_ids         unknown     optional    IDs of tickets to limit discount to
-            discount_quantity_available integer     optional    Number of discount uses
-            discount_start_date         datetime    optional    Allow use from this date
-            discount_end_date           datetime    optional    Allow use until this date
+            discount_code               string   required    Code to activate discount
+            discount_amount_off         unknown  optional    Fixed reduction amount
+            discount_percent_off        string   optional    Percentage reduction
+            discount_ticket_ids         unknown  optional    IDs of tickets to limit discount to
+            discount_quantity_available integer  optional    Number of discount uses
+            discount_start_date         datetime optional    Allow use from this date
+            discount_end_date           datetime optional    Allow use until this date
 
             TODO: Consider deprecating this method
         """
@@ -200,7 +198,8 @@ class Eventbrite(AccessMethodsMixin):
         """
         GET /events/:id/discounts/:id/
         """
-        return self.get("/events/{0}/discounts/{1}/".format(event_id, discount_id))
+        return self.get("/events/{0}/discounts/{1}/".format(
+            event_id, discount_id))
 
     def post_event(self, data):
 
@@ -212,7 +211,8 @@ class Eventbrite(AccessMethodsMixin):
 
     def webhook_to_object(self, webhook):
         """
-        Converts JSON sent by an Eventbrite Webhook to the appropriate Eventbrite object.
+        Converts JSON sent by an Eventbrite Webhook to the appropriate
+        Eventbrite object.
 
         # TODO - Add capability to handle Django request objects
         """
@@ -232,5 +232,3 @@ class Eventbrite(AccessMethodsMixin):
         payload = self.get(webhook['api_url'])
 
         return payload
-
-

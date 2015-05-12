@@ -7,8 +7,6 @@ test_eventbrite
 
 Tests for `eventbrite` module.
 """
-import json
-
 from eventbrite.exceptions import InvalidResourcePath
 from eventbrite.utils import (
     format_path,

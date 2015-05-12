@@ -13,10 +13,11 @@ else:
 
 
 try:  # pragma: no cover
+    # For python 2.6
     import simplejson as json
 except ImportError:
-    # For python 2.6
-    import json
+    # For python 2.7+
+    import json  # noqa
 
 try:
     from urllib.parse import (
@@ -24,7 +25,7 @@ try:
         urljoin,
     )
 except ImportError:
-    from urlparse import (
+    from urlparse import (  # noqa
         urlparse,
         urljoin,
     )

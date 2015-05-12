@@ -15,10 +15,12 @@ from .exceptions import (
     UnsupportedEndpoint,
 )
 
-EVENTBRITE_API_URL = environ.get('EVENTBRITE_API_URL', 'https://www.eventbriteapi.com/v3/')
+EVENTBRITE_API_URL = environ.get(
+    'EVENTBRITE_API_URL', 'https://www.eventbriteapi.com/v3/')
 EVENTBRITE_API_PATH = urlparse(EVENTBRITE_API_URL).path
 
-URL_MAP_FILE = os.path.join(os.path.dirname(__file__), "apiv3_url_mapping.json")
+URL_MAP_FILE = os.path.join(
+    os.path.dirname(__file__), "apiv3_url_mapping.json")
 
 
 def get_mapping(_compiled_mapping=[]):
@@ -40,9 +42,9 @@ def reverse(path_or_url, only_serialized=False):
     parsed_url = urlparse(path_or_url)
     path = parsed_url.path
     if not path.startswith(EVENTBRITE_API_PATH):
-        error_msg = "The path argument must be a string that begins with '{0}'".format(EVENTBRITE_API_PATH)
+        error_msg = "The path argument must be a string that begins with '{0}'".format(EVENTBRITE_API_PATH)  # noqa
         raise InvalidResourcePath(error_msg)
-    stripped_path = path[len(EVENTBRITE_API_PATH):]  # cutting of the common prefix
+    stripped_path = path[len(EVENTBRITE_API_PATH):]  # cutting common prefix
     mapping = get_mapping()
     for endpoint in mapping:
         matches = re.match(endpoint["url_regexp"], stripped_path)

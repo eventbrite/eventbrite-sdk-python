@@ -13,8 +13,7 @@ def test_headers():
         u'content-type': u'application/json',
         u'Authorization': u'Bearer 12345',
         u'User-Agent': "eventbrite-python-sdk {version} ({system})".format(
-                version=__version__,
-                system=platform(),
-            )
+            version=__version__,
+            system=platform(),)
     }
     assert eventbrite.headers == expected_headers

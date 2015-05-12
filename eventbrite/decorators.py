@@ -20,4 +20,3 @@ def objectify(func):
             raise InternetConnectionError(e)
         return EventbriteObject.create(payload)
     return wrapper
-
