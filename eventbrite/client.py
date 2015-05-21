@@ -83,7 +83,6 @@ class Eventbrite(AccessMethodsMixin):
     @objectify
     def delete(self, path, data=None):
         path = format_path(path, self.eventbrite_api_url)
-        json_data = json.dumps(data or {})
         return requests.delete(path, headers=self.headers, data=data or {})
 
     ############################
@@ -113,10 +112,13 @@ class Eventbrite(AccessMethodsMixin):
 
         GET users/:id/orders/
 
-        :param int user_id: (optional) The id assigned to a user. Leave empty to get current user.
-        :param datetime changed_since: (optional) Only return attendees changed on or after the time given
+        :param int user_id: (optional) The id assigned to a user. Leave empty
+            to get current user.
+        :param datetime changed_since: (optional) Only return attendees changed
+            on or after the time given
 
-        .. note:: A datetime represented as a string in ISO8601 combined date and time format, always in UTC.
+        .. note:: A datetime represented as a string in ISO8601 combined date
+            and time format, always in UTC.
         """
         if user_id:
             url = '/users/{0}/orders/'.format(user_id)
@@ -130,7 +132,8 @@ class Eventbrite(AccessMethodsMixin):
 
     def get_event_attendees(self, event_id, status=None, changed_since=None):
         """
-        Returns a paginated response with a key of attendees, containing a list of attendee.
+        Returns a paginated response with a key of attendees, containing a
+        list of attendee.
 
         GET /events/:id/attendees/
         """
@@ -149,7 +152,8 @@ class Eventbrite(AccessMethodsMixin):
 
     def get_event_ticket_classes(self, event_id):
         """
-        Returns a paginated response with a key of ticket_classes, containing a list of ticket_class.
+        Returns a paginated response with a key of ticket_classes, containing
+        a list of ticket_class.
 
         GET /events/:id/ticket_classes/
         """
