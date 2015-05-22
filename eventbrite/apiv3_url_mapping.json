@@ -365,5 +365,17 @@
         "response_type": "single_response",
         "serializer": "MobileDevice",
         "url_regexp": "^devices/me/$"
+    },
+    {
+        "data_type": "serialized",
+        "response_type": "paginated_response",
+        "serializer": "Webhook",
+        "url_regexp": "^webhooks/$"
+    },
+    {
+        "data_type": "serialized",
+        "response_type": "single_response",
+        "serializer": "Webhook",
+        "url_regexp": "^webhooks/(?P<id>\\d+)/$"
     }
 ]
