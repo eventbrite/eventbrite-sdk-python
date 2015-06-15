@@ -11,4 +11,4 @@ Development Leads
 Contributors
 ------------
 
-None yet. Why not be the first?
+* Piotr Banaszkiewicz <piotr@banaszkiewicz.org>
