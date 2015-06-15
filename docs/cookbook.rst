@@ -13,7 +13,7 @@ Get a List of My Draft/Unpublished Events
     my_id = eventbrite.get_user()['id']
 
     # Get a raw list of events (includes pagination details)
-    events_response = eventbrite.event_search(**{'user.id':myid}
+    events = eventbrite.event_search(**{'user.id': my_id})
 
     # List the events in draft status
     [x for x in events['events'] if x['status'] == 'draft']
