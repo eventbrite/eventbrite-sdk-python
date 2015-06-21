@@ -209,6 +209,14 @@ class Eventbrite(AccessMethodsMixin):
 
         return self.post("/events/", data=data)
 
+    def publish_event(self, event_id):
+
+        return self.post("/events/%s/publish/" % event_id)
+
+    def unpublish_event(self, event_id):
+
+        return self.post("/events/%s/unpublish/" % event_id)
+
     def event_search(self, **data):
         # Resolves the search result response problem
         return self.get("/events/search/", data=data)

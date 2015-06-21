@@ -19,6 +19,18 @@
     },
     {
         "data_type": "serialized",
+        "response_type": "single_response",
+        "serializer": "Event",
+        "url_regexp": "^events/(?P<event_id>\\d+)/publish/$"
+    },
+    {
+        "data_type": "serialized",
+        "response_type": "single_response",
+        "serializer": "Event",
+        "url_regexp": "^events/(?P<event_id>\\d+)/unpublish/$"
+    },
+    {
+        "data_type": "serialized",
         "response_type": "paginated_response",
         "serializer": "Order",
         "url_regexp": "^events/(?P<event_id>\\d+)/orders/$"
