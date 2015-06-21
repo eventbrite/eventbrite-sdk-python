@@ -55,7 +55,7 @@ class TestEvents(unittest.TestCase):
             'event.password': "test",
             'event.capacity': 10,
         }
-        event = self.eventbrite.post('/events/', data=event_data)
+        event = self.eventbrite.post_event(event_data)
         self.assertEqual(event_name, event['name']['text'])
         self.assertEqual(event_name, event['name']['html'])
         # Just for access to see the event, not full authentication
