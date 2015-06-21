@@ -56,13 +56,60 @@ class TestEvents(unittest.TestCase):
         events = self.eventbrite.event_search(**data)
         self.assertLess(events['pagination'][u'object_count'], 1000)
 
-    def _get_event_data(self, event_name=None):
+    def test_publish_unpublish_event(self):
+
+        """ First, creat a draft event """
+        event_data = self._get_event_data()
+        event = self.eventbrite.post_event(event_data)
+        self.assertTrue(event.ok,
+                        msg=event.get('error_description', None))
+
+        """ Next, create a ticket class for the event, because an event
+            can't be published without one """
+        ticket_data = self._get_ticket_data()
+        response = self.eventbrite.post_event_ticket_class(event['id'],
+                                                           data=ticket_data)
+
+        """Finally, try to publish the event"""
+        response = self.eventbrite.publish_event(event['id'])
+        self.assertTrue(response.ok,
+                        msg=response.get('error_description', None))
+
+        """Now try to unpublish the event"""
+        response = self.eventbrite.unpublish_event(event['id'])
+        self.assertTrue(response.ok,
+                        msg=response.get('error_description', None))
+
+    def test_create_ticket_class(self):
+
+        event_data = self._get_event_data()
+        event = self.eventbrite.post_event(event_data)
+
+        ticket_data = self._get_ticket_data()
+        response = self.eventbrite.post_event_ticket_class(event['id'],
+                                                           data=ticket_data)
+        self.assertTrue(response.ok,
+                        msg=response.get('error_description', None))
+
+    def _get_ticket_data(self):
+
+        return {
+            'ticket_class.name': 'client_test_ticket_{0}'.format(datetime.now()),
+            'ticket_class.description': 'Python API Client testing',
+            'ticket_class.quantity_total': 100,
+            'ticket_class.cost': {
+                "currency": 'USD',
+                'value': 200,
+            }
+        }
+
+    def _get_event_data(self, event_name='client_test_{0}'.format(datetime.now())):
         """ Returns a dictionary representing a valid event """
 
-        if not event_name:
-            event_name = 'client_test_{0}'.format(datetime.now())
+        # if not event_name:
+        #     event_name = 'client_test_{0}'.format(datetime.now())
 
-        event_data = {
+        return {
             'event.name': {
                 'html': event_name,
             },
@@ -82,8 +129,6 @@ class TestEvents(unittest.TestCase):
             'event.password': "test",
             'event.capacity': 10,
         }
-
-        return event_data
 
 
 if __name__ == '__main__':
