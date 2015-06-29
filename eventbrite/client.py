@@ -23,11 +23,11 @@ from .utils import (
 class Eventbrite(AccessMethodsMixin):
 
     allowed_methods = ['post', 'get', 'delete']
-    eventbrite_api_url = EVENTBRITE_API_URL
     content_type_specified = True
 
-    def __init__(self, oauth_token):
+    def __init__(self, oauth_token, eventbrite_api_url=EVENTBRITE_API_URL):
         self.oauth_token = oauth_token
+        self.eventbrite_api_url = EVENTBRITE_API_URL
 
     @property
     def headers(self):
