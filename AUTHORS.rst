@@ -12,3 +12,4 @@ Contributors
 ------------
 
 * Piotr Banaszkiewicz <piotr@banaszkiewicz.org>
+* Ryan Bagwell <ryan@ryanbagwell.com>
