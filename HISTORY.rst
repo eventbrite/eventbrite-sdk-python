@@ -3,9 +3,11 @@
 History
 -------
 
-3.2.0 (2015-06-28)
+
+3.2.0 (2015-07-07)
 -------------------
 
+* Added new publish and unpublish methods thanks to Ryan Bagwell.
 * Eventbrite client now accepts an ``eventbrite_api_url`` argument.
 
 3.1.0 (2015-05-11)
