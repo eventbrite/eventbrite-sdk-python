@@ -10,10 +10,10 @@ from eventbrite import Eventbrite
 
 from ..base import unittest
 
-try:
-    OAUTH_TOKEN = os.environ[u'EVENTBRITE_OAUTH_TOKEN']
+OAUTH_TOKEN = os.environ.get('EVENTBRITE_OAUTH_TOKEN', '')
+if OAUTH_TOKEN:
     skip_integration_tests = False
-except KeyError:
+else:
     skip_integration_tests = True
 
 try:
@@ -56,6 +56,8 @@ class TestEvents(unittest.TestCase):
         events = self.eventbrite.event_search(**data)
         self.assertLess(events['pagination'][u'object_count'], 1000)
 
+    @unittest.skipIf(
+        condition=skip_integration_tests, reason='Needs an OAUTH_TOKEN')
     def test_publish_unpublish_event(self):
 
         """ First, creat a draft event """
@@ -80,6 +82,8 @@ class TestEvents(unittest.TestCase):
         self.assertTrue(response.ok,
                         msg=response.get('error_description', None))
 
+    @unittest.skipIf(
+        condition=skip_integration_tests, reason='Needs an OAUTH_TOKEN')
     def test_create_ticket_class(self):
 
         event_data = self._get_event_data()
