@@ -27,7 +27,7 @@ class Eventbrite(AccessMethodsMixin):
 
     def __init__(self, oauth_token, eventbrite_api_url=EVENTBRITE_API_URL):
         self.oauth_token = oauth_token
-        self.eventbrite_api_url = EVENTBRITE_API_URL
+        self.eventbrite_api_url = eventbrite_api_url
 
     @property
     def headers(self):
