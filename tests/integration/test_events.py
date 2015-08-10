@@ -101,10 +101,7 @@ class TestEvents(unittest.TestCase):
             'ticket_class.name': 'client_test_ticket_{0}'.format(datetime.now()),
             'ticket_class.description': 'Python API Client testing',
             'ticket_class.quantity_total': 100,
-            'ticket_class.cost': {
-                "currency": 'USD',
-                'value': 200,
-            }
+            'ticket_class.cost': 'USD,4500'
         }
 
     def _get_event_data(self, event_name='client_test_{0}'.format(datetime.now())):
