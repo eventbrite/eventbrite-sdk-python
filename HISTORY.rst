@@ -3,9 +3,11 @@
 History
 -------
 
-3.x.x (2015-08-??)
+3.2.1 (2015-08-10)
 ------------------
 
+* Enabled webhooks
+* Fixed ticket definitions in Event creation test
 * Set input variable using input argument thanks to Bill So (#27).
 
 3.2.0 (2015-07-07)
