@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import pprint
-from .utils import reverse
 
 
 class EventbriteObject(dict):
@@ -28,19 +27,10 @@ class EventbriteObject(dict):
         evbobject.reason = response.reason
         evbobject.status_code = response.status_code
         evbobject.request = response.request
-        api_data_type = reverse(evbobject.resource_uri)
-        # TODO: figure out what to do with endpoint, which doesn't have
-        #   defined serializer
-        # TODO: solve issue with non-standard serializes not mapping directly
-        #   to defined objects
-        evbobject.type = api_data_type.get("serializer", "")
         # if it's paginated, it's a list, otherwise we don't know yet
-        if api_data_type.get("response_type") == "paginated_response":
-            evbobject.is_list = True  # evbobject.is_paginated = True
-            evbobject.is_paginated = True
-        else:
-            evbobject.is_list = False  # evbobject.is_paginated = False
-            evbobject.is_paginated = False
+        evbobject.pagination = data.get('pagination', False)
+        evbobject.is_list = bool(evbobject.pagination)  # evbobject.is_paginated = True
+        evbobject.is_paginated = bool(evbobject.pagination)
         evbobject.pk = evbobject.id = data.get('id')
         evbobject.pagination = data.get('pagination')
         return evbobject

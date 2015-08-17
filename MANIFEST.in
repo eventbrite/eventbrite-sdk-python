@@ -3,7 +3,6 @@ include CONTRIBUTING.rst
 include HISTORY.rst
 include LICENSE
 include README.rst
-include eventbrite/apiv3_url_mapping.json
 
 recursive-include tests *
 recursive-exclude * __pycache__

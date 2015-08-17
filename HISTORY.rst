@@ -3,6 +3,11 @@
 History
 -------
 
+3.3.2  (2015-08-17)
+-------------------
+
+* Removed type mapping as it added unnecessary complexity preventing easy management of paginated responses.
+
 3.2.1 (2015-08-10)
 ------------------
 

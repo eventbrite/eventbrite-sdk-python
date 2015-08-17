@@ -36,27 +36,6 @@ def get_mapping(_compiled_mapping=[]):
         raise  # TODO: do we handle it here?
 
 
-def reverse(path_or_url, only_serialized=False):
-    """Look up data types returned by API endpoint for specific url/path
-    """
-    parsed_url = urlparse(path_or_url)
-    path = parsed_url.path
-    if not path.startswith(EVENTBRITE_API_PATH):
-        error_msg = "The path argument must be a string that begins with '{0}'".format(EVENTBRITE_API_PATH)  # noqa
-        raise InvalidResourcePath(error_msg)
-    stripped_path = path[len(EVENTBRITE_API_PATH):]  # cutting common prefix
-    mapping = get_mapping()
-    for endpoint in mapping:
-        matches = re.match(endpoint["url_regexp"], stripped_path)
-        if matches:
-            if endpoint["data_type"] == "UNKNOWN":
-                raise UnsupportedEndpoint(path)
-            if only_serialized and endpoint["data_type"] != "serialized":
-                raise UnsupportedEndpoint(path)
-            return endpoint
-    raise UnknownEndpoint(path)
-
-
 def format_path(path, eventbrite_api_url=EVENTBRITE_API_URL):
     error_msg = "The path argument must be a string that begins with '/'"
     if not isinstance(path, string_type):

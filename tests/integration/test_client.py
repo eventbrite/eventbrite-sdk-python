@@ -82,7 +82,8 @@ class TestClientAccessMethods(unittest.TestCase):
         self.assertTrue(isinstance(evbobject, EventbriteObject))
 
         # check attributes
-        attrs = ['id', 'pk', 'type', 'is_paginated', 'is_list', 'status_code']
+        attrs = ['id', 'pk', 'is_paginated', 'is_list', 'status_code']
+
         for attribute in attrs:
             self.assertTrue(attribute in evbobject.__dict__.keys())
 
@@ -100,7 +101,7 @@ class TestClientAccessMethods(unittest.TestCase):
         self.assertTrue(isinstance(evbobject, EventbriteObject))
 
         # check attributes
-        attrs = ['id', 'pk', 'type', 'is_paginated', 'is_list', 'status_code']
+        attrs = ['id', 'pk', 'is_paginated', 'is_list', 'status_code']
         for attribute in attrs:
             self.assertTrue(attribute in evbobject.__dict__.keys())
 
