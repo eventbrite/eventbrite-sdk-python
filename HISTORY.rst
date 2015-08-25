@@ -3,6 +3,15 @@
 History
 -------
 
+3.3.3 (2015-08-24)
+-------------------
+
+* Added 3 new user endpoints, thanks to @jon-ga (#29)
+
+  * GET /users/:id/events/
+  * GET /users/:id/venues/
+  * GET /users/:id/organizers/
+
 3.3.2  (2015-08-17)
 -------------------
 
