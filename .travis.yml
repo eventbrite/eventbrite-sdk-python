@@ -18,3 +18,9 @@ install: pip install -r requirements.txt --use-mirrors
 
 # command to run tests
 script: py.test tests
+
+before_install:
+  - pip install codecov
+
+after_success:
+  - codecov
