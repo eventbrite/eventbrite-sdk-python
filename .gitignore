@@ -1,6 +1,7 @@
 *.py[cod]
 
 .env
+.cache/
 
 # Auto-generated files
 utils/access_methods.py
