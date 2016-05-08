@@ -206,7 +206,7 @@ def create_method_from_row(row, path, file_name, method_count):
     # params = get_params_from_page(path, file_name, method_count)
     data = {
         'method_name': get_method_name_from_row(row),
-        'arguments':  get_args_from_row(row),
+        'arguments': get_args_from_row(row),
         'method_type': row.split(' ')[0].lower().strip(),
         'method_path': get_method_path_from_row(row),
         'params': []  # params
