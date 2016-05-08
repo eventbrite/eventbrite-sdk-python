@@ -2,6 +2,9 @@
 
 .env
 
+# Auto-generated files
+utils/access_methods.py
+
 # C extensions
 *.so
 
