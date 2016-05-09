@@ -27,7 +27,7 @@ if sys.argv[-1] == 'test':
 readme = open('README.rst').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
-requirements = ["requests>=2.0",]
+requirements = ["requests>=2.0", ]
 
 # Add Python 2.6-specific dependencies
 if sys.version_info[:2] < (2, 7):
