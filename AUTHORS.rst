@@ -15,3 +15,5 @@ Contributors
 * Ryan Bagwell <ryan@ryanbagwell.com>
 * Bill So <bill@eventbrite.com>
 * Jon Kaczynski <jon@generalassemb.ly>
+* Dan Moore <dan@moore.cx>
+
