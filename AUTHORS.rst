@@ -16,4 +16,3 @@ Contributors
 * Bill So <bill@eventbrite.com>
 * Jon Kaczynski <jon@generalassemb.ly>
 * Dan Moore <dan@moore.cx>
-

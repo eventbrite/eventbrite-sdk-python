@@ -3,6 +3,12 @@
 History
 -------
 
+3.3.4 (2016-05-05)
+-------------------
+
+* Added new organizers endpoint (thanks tp @mgrdcm)
+    * GET /organizers/:id/events/
+
 3.3.3 (2015-08-24)
 -------------------
 
