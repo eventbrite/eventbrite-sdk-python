@@ -100,7 +100,7 @@ class Eventbrite(AccessMethodsMixin):
         :param int venue_id: (required) The id of a venue
         
         """
-        return self.get('/venues/{0}/'.format(event_id))
+        return self.get('/venues/{0}/'.format(venue_id))
     
     def get_user(self, user_id=None):
         """
