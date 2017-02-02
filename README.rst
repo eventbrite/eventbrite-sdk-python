@@ -29,7 +29,7 @@ If you need to, you can also use `easy_install`::
     $ easy_install eventbrite
 
 Usage
---------
+-----
 
 The Eventbrite Python SDK makes it trivial to interact with the Eventbrite API:
 
@@ -102,12 +102,14 @@ Because this client interacts with Eventbrite's third API (a.k.a. APIv3), we are
 .. _requests: https://pypi.python.org/pypi/requests
 .. _Eventbrite: https://www.eventbrite.com
 
-## Contributing
+Contributing
+------------
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/eventbrite/eventbrite-sdk-python.
 
 
-## License
+License
+-------
 
 The library is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
 
