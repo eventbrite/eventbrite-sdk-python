@@ -8,9 +8,6 @@ eventbrite-sdk-python
 .. image:: https://travis-ci.org/eventbrite/eventbrite-sdk-python.svg?branch=master
         :target: https://travis-ci.org/eventbrite/eventbrite-sdk-python
 
-.. image:: https://pypip.in/d/eventbrite/badge.png
-        :target: https://pypi.python.org/pypi/eventbrite
-
 
 * Official Eventbrite_ SDK for Python
 * Full Documentation: http://eventbrite-sdk-python.readthedocs.org/
