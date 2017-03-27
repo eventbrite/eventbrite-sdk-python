@@ -33,6 +33,7 @@ class EventbriteObject(dict):
         evbobject.is_paginated = bool(evbobject.pagination)
         evbobject.pk = evbobject.id = data.get('id')
         evbobject.pagination = data.get('pagination')
+        evbobject.response = response
         return evbobject
 
     @property
