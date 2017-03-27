@@ -328,6 +328,16 @@ class AccessMethodsMixin(object):
         
         return self.post("/organizers/{0}/".format(id), data=data)
 
+    def get_organizer_events(self, id, **data):
+        """
+        GET /organizers/:id/events/
+        Returns a paginated response of :format:`events <event>`, under
+        the key ``events``, of all events the organizer has access to
+
+        """
+
+        return self.get("/organizers/{0}/events/".format(id), data=data)
+
     def get_system_timezones(self, **data):
         """
         GET /system/timezones/
@@ -370,6 +380,36 @@ class AccessMethodsMixin(object):
         """
         
         return self.get("/users/{0}/owned_events/".format(id), data=data)
+
+    def get_user_events(self, id, **data):
+        """
+        GET /users/:id/events/
+        Returns a paginated response of :format:`events <event>`, under
+        the key ``events``, of all events the user has access to
+
+        """
+
+        return self.get("/users/{0}/events/".format(id), data=data)
+
+    def get_user_venues(self, id, **data):
+        """
+        GET /users/:id/venues/
+        Returns a paginated response of :format:`venues <venue>` objects
+        that are owned by the user.
+
+        """
+
+        return self.get("/users/{0}/venues/".format(id), data=data)
+
+    def get_user_organizers(self, id, **data):
+        """
+        GET /users/:id/organizers/
+        Returns a paginated response of :format:`organizers <organizer>` objects
+        that are owned by the user.
+
+        """
+
+        return self.get("/users/{0}/organizers/".format(id), data=data)
 
     def get_user_owned_event_attendees(self, id, **data):
         """

@@ -8,7 +8,7 @@ try:
 except ImportError:
     from distutils.core import setup
 
-__version__ = '3.1.0.1'
+__version__ = '3.3.4.1'
 
 if sys.argv[-1] == 'tag':
     os.system("git tag -a %s -m 'version %s'" % (__version__, __version__))
@@ -27,7 +27,7 @@ if sys.argv[-1] == 'test':
 readme = open('README.rst').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
-requirements = ["requests>=2.0",]
+requirements = ["requests>=2.0", ]
 
 # Add Python 2.6-specific dependencies
 if sys.version_info[:2] < (2, 7):

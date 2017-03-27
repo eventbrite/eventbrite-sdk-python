@@ -11,4 +11,8 @@ Development Leads
 Contributors
 ------------
 
-None yet. Why not be the first?
+* Piotr Banaszkiewicz <piotr@banaszkiewicz.org>
+* Ryan Bagwell <ryan@ryanbagwell.com>
+* Bill So <bill@eventbrite.com>
+* Jon Kaczynski <jon@generalassemb.ly>
+* Dan Moore <dan@moore.cx>

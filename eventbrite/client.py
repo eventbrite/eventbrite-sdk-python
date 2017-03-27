@@ -23,11 +23,11 @@ from .utils import (
 class Eventbrite(AccessMethodsMixin):
 
     allowed_methods = ['post', 'get', 'delete']
-    eventbrite_api_url = EVENTBRITE_API_URL
     content_type_specified = True
 
-    def __init__(self, oauth_token):
+    def __init__(self, oauth_token, eventbrite_api_url=EVENTBRITE_API_URL):
         self.oauth_token = oauth_token
+        self.eventbrite_api_url = eventbrite_api_url
 
     @property
     def headers(self):
@@ -208,6 +208,17 @@ class Eventbrite(AccessMethodsMixin):
     def post_event(self, data):
 
         return self.post("/events/", data=data)
+
+    def publish_event(self, event_id):
+
+        return self.post("/events/%s/publish/" % event_id)
+
+    def unpublish_event(self, event_id):
+
+        return self.post("/events/%s/unpublish/" % event_id)
+
+    def post_event_ticket_class(self, event_id, data):
+        return self.post("/events/{0}/ticket_classes/".format(event_id), data=data)
 
     def event_search(self, **data):
         # Resolves the search result response problem

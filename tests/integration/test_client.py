@@ -37,7 +37,7 @@ class TestClient(unittest.TestCase):
         payload = eventbrite.api("get", "/users/me/", {})
 
         self.assertEqual(
-            sorted([u'id', u'first_name', u'last_name', u'emails', u'name']),
+            sorted([u'id', u'image_id', u'first_name', u'last_name', u'emails', u'name']),
             sorted(payload.keys())
         )
 
@@ -82,7 +82,8 @@ class TestClientAccessMethods(unittest.TestCase):
         self.assertTrue(isinstance(evbobject, EventbriteObject))
 
         # check attributes
-        attrs = ['id', 'pk', 'type', 'is_paginated', 'is_list', 'status_code']
+        attrs = ['id', 'pk', 'is_paginated', 'is_list', 'status_code']
+
         for attribute in attrs:
             self.assertTrue(attribute in evbobject.__dict__.keys())
 
@@ -100,7 +101,7 @@ class TestClientAccessMethods(unittest.TestCase):
         self.assertTrue(isinstance(evbobject, EventbriteObject))
 
         # check attributes
-        attrs = ['id', 'pk', 'type', 'is_paginated', 'is_list', 'status_code']
+        attrs = ['id', 'pk', 'is_paginated', 'is_list', 'status_code']
         for attribute in attrs:
             self.assertTrue(attribute in evbobject.__dict__.keys())
 
@@ -133,3 +134,22 @@ class TestClientAccessMethods(unittest.TestCase):
         evbobject = self.eventbrite.get_event(
             '11260994939', expand='ticket_classes')
         self.assertTrue('ticket_classes' in evbobject)
+
+
+class TestCRUDWebhooks(unittest.TestCase):
+
+    def setUp(self):
+        self.eventbrite = Eventbrite(OAUTH_TOKEN)
+
+    @unittest.skipIf(
+        condition=skip_integration_tests,
+        reason='Needs an OAUTH_TOKEN')
+    def test_basic_webhook(self):
+        data = dict(
+            endpoint_url='http://example.com',
+            actions='',
+            event_id='15562735561'
+        )
+        response = self.eventbrite.post_webhooks(**data)
+        self.assertTrue(response.ok)
+        self.assertEqual(response['event_id'], '15562735561')
