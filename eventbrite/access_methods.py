@@ -16,7 +16,6 @@ class AccessMethodsMixin(object):
         Returns a list of :format:`category` as ``categories``, including
         subcategories nested.
         """
-        print 'I love categories too!'
         return self.get("/categories/", data=data)
 
     def get_category(self, id, **data):
