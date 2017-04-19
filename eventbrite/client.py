@@ -91,6 +91,17 @@ class Eventbrite(AccessMethodsMixin):
     #
     ############################
 
+    def get_venue(self, venue_id):
+        """
+        Returns an event for a specified id.
+        
+        GET venues/:id/
+        
+        :param int venue_id: (required) The id of a venue
+        
+        """
+        return self.get('/venues/{0}/'.format(venue_id))
+    
     def get_user(self, user_id=None):
         """
         Returns a user for the specified user as user.
