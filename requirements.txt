@@ -1,5 +1,8 @@
 wheel==0.23.0
 requests>=2.0
+beautifulsoup4==4.6.0
+click==6.7
+Jinja2==2.9.6
 mock
 unittest2
 pytest==2.6.4
