@@ -512,14 +512,14 @@ class AccessMethodsMixin(object):
         
         return self.post("/series/{0}/events/".format(id), data=data)
 
-    def get_formatss(self, **data):
+    def get_formats(self, **data):
         """
         GET /formats/
         Returns a list of :format:`format` as ``formats``.
         """
         return self.get("/formats/", data=data)
 
-    def get_formats(self, id, **data):
+    def get_format(self, id, **data):
         """
         GET /formats/:id/
         Gets a :format:`format` by ID as ``format``.        """
