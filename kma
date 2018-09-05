@@ -1,0 +1,78 @@
+#!/bin/perl -w
+
+open (BANNER, "/data2/white_house/clinton1/menus/banner.html");
+# open (NAVBAR, "/data2/white_house/clinton1/menus/navbar.html");
+my $banner=join("",<BANNER>);
+# my $navbar=join("",<NAVBAR>);
+close (BANNER);
+# close (NAVBAR);
+
+### Print Response Page #################################################
+
+print "Content-type: text/html\n\n";
+print<<ENDOFHTML;
+<HTML>
+<HEAD>
+<TITLE>NARA MailTo Notice</TITLE>
+<META NAME="Owner" CONTENT=" ">
+<LINK REV="made" HREF="mailto: X\@arch1.nara.gov">
+<META NAME="expires" CONTENT="01/01/2001">
+
+<SCRIPT LANGUAGE="JavaScript"> 
+
+  function goBack()
+  {
+    history.back()
+  }
+
+  function returnDelay() 
+  { 
+    setTimeout("goBack()",5000)
+  }
+ 
+  window.onload=returnDelay
+
+</SCRIPT>
+
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" onload="javascript:returnDelay()">
+
+
+<!-- Begin NARA Banner -->
+$banner
+<!-- End NARA Banner -->
+
+<!-- Begin NARA Navigation Bar -->
+$navbar
+<!-- End NARA Navigation Bar -->
+
+<H2 ALIGN="CENTER">The Mail functionality is not available on this web site.</H2>
+
+<P ALIGN="CENTER">Click or wait to be returned to your previous page.</P>
+<form>
+  <center>
+    <input type="button" value="Return" onClick="goBack()">
+  </center>
+</form>
+
+<HR>
+<ADDRESS>
+  <FONT SIZE=-1>
+  <A HREF="/">National Archives and Records Administration</A><BR>
+  <A HREF="mailto:webmaster\@nara.gov">webmaster\@nara.gov</A><BR>
+  Last Updated: November 16, 2000
+  </FONT>
+</ADDRESS>
+
+</BODY>
+</HTML>
+ENDOFHTML
+##########################################################################
+close STDOUT;
+
+
+open(LOG,">>exit.log");
+print LOG "$ENV{HTTP_REFERER} -> $url\n";
+close LOG;
+
+exit 0;

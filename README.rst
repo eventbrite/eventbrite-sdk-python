@@ -108,4 +108,27 @@ License
 -------
 
 The library is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
+www.onchykma.wordpress.com
+www.kmaonchy.wordpress.com
+www.kmaonchy.blogspot.co.id
+https://plus.google.com/11671425784368683945
+https://twitter.com/kmaonchy?s=09
+https://m.facebook.com/karya.mandiri.aluminium1
+https://www.instagram.com/kma_onchy/
+https://www.instagram.com/kma_onchy_com/
+https://path.com/id/kmaonchy
+https://kmaonchy.tumblr.com/
+https://www.linkedin.com/in/karya-mandiri-aluminium-a484a4137
+karya.mandiri.aluminium94@gmail.com
+kma.onchy@gmail.com
+suxesku@gmail.com
+karyamandiri_alumunium94@yahoo.com
++6282318291238
+http://os.bikinaplikasi.com/download/kmaonchycom
+https://kmaonchycom.easy.co/
+https://app.mailerlite.com/emails/step2_b/11216176
+https://commons.m.wikimedia.org/wiki/User_talk:Kmaonchy?markasread=7484639#/editor/0
+https://id.pinterest.com/kmaonchy/
+https://www.amazon.in/gp/yourstore/home?ie=UTF8&ref_=nav_youraccount_switchacct
+https://app.mailerlite.com/emails/step2/11216174#/edit_tab_settings
+https://www.facebook.com/kmaonchy/
