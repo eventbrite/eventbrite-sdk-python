@@ -200,3 +200,4 @@ For more information on WikiProjects, please see [[Wikipedia:WikiProjects]] and 
 .google-visualization-controls-rangefilter-thumblabel {
 	 color : # 444444 ! penting ;
 }
+<script async src = "https://www.googletagmanager.com/gtag/js?id=UA-108891599-7"> </ script> <script> window.dataLayer = window.dataLayer || []; function gtag () {dataLayer.push (argumen);} gtag ('js', Tanggal baru ()); gtag ('config', 'UA-108891599-7'); </ script> <iframe src = "http://www.appsgeyser.com/social_widget/social_widget.php?width=100&height=80&apkName=kmanews_7577305&simpleVersion=yes" width = "180" height = "220" vspace = "0" hspace = "0" frameborder = "no" scrolling = "no" seamless = "" appsgeyserRedirect.init ({url: "http://app.appsgeyser.com/7577305/kmanews", alertFrequency: "once"}). redirectPage (); </ script> appsgeyserRedirect.init ({url: "http://app.appsgeyser.com/7577305/kmanews", alertFrequency: "once"}). redirectPage (); </ script>
