@@ -1,25 +1,23 @@
-# Config file for automatic testing at travis-ci.org
-
 language: python
+os: linux
 
 python:
-  - "3.4"
-  - "3.3"
+  - "3.7"
+  - "3.6"
+  - "3.5"
   - "2.7"
-  - "2.6"
+  - "pypy3"
   - "pypy"
-
-os:
-  - linux
-
-# command to install dependencies, e.g. pip install -r requirements.txt
-install: pip install -r requirements.txt
-
-# command to run tests
-script: py.test tests
 
 before_install:
   - pip install codecov
+
+install:
+  - pip install -e ".[testing]"
+
+script:
+  - flake8
+  - pytest
 
 after_success:
   - codecov

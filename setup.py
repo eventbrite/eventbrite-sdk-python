@@ -21,17 +21,25 @@ if sys.argv[-1] == 'publish':
     sys.exit()
 
 if sys.argv[-1] == 'test':
-    os.system('py.test')
+    os.system('pytest')
     sys.exit()
 
-readme = open('README.rst').read()
-history = open('HISTORY.rst').read().replace('.. :changelog:', '')
+with open('README.rst') as readme_file:
+    readme = readme_file.read()
+with open('HISTORY.rst') as history_file:
+    history = history_file.read().replace('.. :changelog:', '')
 
-requirements = ["requests>=2.0", ]
+install_requires = [
+    "requests>=2.0",
+]
 
-# Add Python 2.6-specific dependencies
-if sys.version_info[:2] < (2, 7):
-    requirements.append('simplejson')
+tests_require = [
+    'coverage',
+    'flake8',
+    'mock; python_version < "3"',
+    'pytest',
+
+]
 
 setup(
     name='eventbrite',
@@ -44,10 +52,15 @@ setup(
     packages=[
         'eventbrite',
     ],
-    package_dir={'eventbrite':
-                 'eventbrite'},
+    package_dir={
+        'eventbrite': 'eventbrite',
+    },
     include_package_data=True,
-    install_requires=requirements,
+    install_requires=install_requires,
+    tests_require=tests_require,
+    extras_require={
+        'testing': tests_require,
+    },
     license="Apache",
     zip_safe=False,
     keywords='eventbrite',
@@ -61,11 +74,11 @@ setup(
         'Operating System :: MacOS :: MacOS X',
         'Operating System :: POSIX :: Linux',
         'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy',
         'Topic :: Internet :: WWW/HTTP',

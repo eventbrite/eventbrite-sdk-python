@@ -32,16 +32,16 @@ clean-test:
 	rm -fr htmlcov/
 
 lint:
-	flake8 eventbrite tests
+	flake8
 
 test:
-	py.test
+	pytest
 
 test-all:
 	tox
 
 coverage:
-	coverage run --source eventbrite -m py.test
+	coverage run --source eventbrite -m pytest
 	coverage report -m
 	coverage html
 	open htmlcov/index.html

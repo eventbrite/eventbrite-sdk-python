@@ -2,22 +2,22 @@
 
 import sys
 
+
 PY3 = sys.version_info[0] == 3
-OLD_PY2 = sys.version_info[:2] < (2, 7)
 
 
 if PY3:
     string_type = str
 else:
-    string_type = basestring
+    string_type = basestring  # noqa: F821
 
 
 try:  # pragma: no cover
-    # For python 2.6
+    # FIXME: This import must be kept to avoid a breaking change in environments
+    # that install `simplejson`, even in newer Python versions.
     import simplejson as json
 except ImportError:
-    # For python 2.7+
-    import json  # noqa
+    import json  # noqa: F401
 
 try:
     from urllib.parse import (
@@ -25,7 +25,7 @@ try:
         urljoin,
     )
 except ImportError:
-    from urlparse import (  # noqa
+    from urlparse import (  # noqa: F401
         urlparse,
         urljoin,
     )
