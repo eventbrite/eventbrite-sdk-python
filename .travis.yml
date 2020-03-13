@@ -17,5 +17,10 @@ script:
 after_success:
 - codecov
 deploy:
+  provider: pypi
+  user: eventbrite
   password:
     secure: kWnYLo6k/rrUiqXfd0jg8nYZk6CZa26ck0kW3c6r20xkELkpjyu+qQkgm2EOX+9dNAx8ULaYPNfYuSH+AWWgpAX0n8XEXIctCrD1I5YTU0W9OMtrcfaTCzVDHQ9Qj3uTuN0by4UbZ4VAlzz2YI7dou1E6f3neDNiS1ufWdssHnU=
+  on:
+      tags: true
+      python: '3.7'
