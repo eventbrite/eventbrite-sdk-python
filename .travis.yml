@@ -1,6 +1,7 @@
 language: python
 os: linux
 python:
+- '3.8'
 - '3.7'
 - '3.6'
 - '3.5'
@@ -22,5 +23,5 @@ deploy:
   password:
     secure: kWnYLo6k/rrUiqXfd0jg8nYZk6CZa26ck0kW3c6r20xkELkpjyu+qQkgm2EOX+9dNAx8ULaYPNfYuSH+AWWgpAX0n8XEXIctCrD1I5YTU0W9OMtrcfaTCzVDHQ9Qj3uTuN0by4UbZ4VAlzz2YI7dou1E6f3neDNiS1ufWdssHnU=
   on:
-      tags: true
-      python: '3.7'
+    tags: true
+    python: '3.8'
