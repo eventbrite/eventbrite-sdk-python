@@ -3,14 +3,21 @@
 History
 -------
 
+3.3.5 (2020-03-16)
+------------------
+
+* Added testing and support for Python versions up to 3.8, along with PyPy 3.
+* Remove support for deprecated Python versions 2.6, 3.3, and 3.4.
+* Fixed ``get_format()`` and ``get_formats()`` methods, to use the right endpoint.
+
 3.3.4 (2016-05-05)
--------------------
+------------------
 
 * Added new organizers endpoint (thanks tp @mgrdcm)
     * GET /organizers/:id/events/
 
 3.3.3 (2015-08-24)
--------------------
+------------------
 
 * Added 3 new user endpoints, thanks to @jon-ga (#29)
 
