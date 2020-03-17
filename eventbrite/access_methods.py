@@ -51,7 +51,7 @@ class AccessMethodsMixin(object):
         Returns a list of :format:`format` as ``formats``.
 
         """
-        return self.get("/format/", data=data)
+        return self.get("/formats/", data=data)
 
     def get_format(self, id, **data):
         """
@@ -59,7 +59,7 @@ class AccessMethodsMixin(object):
         Gets a :format:`format` by ID as ``format``.
         """
 
-        return self.get("/format/{0}/".format(id), data=data)
+        return self.get("/formats/{0}/".format(id), data=data)
 
     def get_event(self, id, **data):
         """
@@ -151,7 +151,7 @@ class AccessMethodsMixin(object):
         key ``discount``.
 
         """
-        
+
         return self.post("/events/{0}/discounts/{1}/".format(id,discount_id), data=data)
 
     def delete_event_discounts(self, id, discount_id, **data):
@@ -185,7 +185,7 @@ class AccessMethodsMixin(object):
         :format:`discount` as the key ``discount``.
 
         """
-        
+
         return self.post("/events/{0}/public_discounts/".format(id), data=data)
 
     def get_event_public_discounts(self, id, discount_id, **data):
@@ -194,7 +194,7 @@ class AccessMethodsMixin(object):
         Gets a public :format:`discount` by ID as the key ``discount``.
 
         """
-        
+
         return self.get("/events/{0}/public_discounts/{1}/".format(id,discount_id), data=data)
 
     def post_event_public_discounts(self, id, discount_id, **data):
@@ -204,7 +204,7 @@ class AccessMethodsMixin(object):
         :format:`discount` as the key ``discount``.
 
         """
-        
+
         return self.post("/events/{0}/public_discounts/{1}/".format(id,discount_id), data=data)
 
     def delete_event_public_discounts(self, id, discount_id, **data):
@@ -213,7 +213,7 @@ class AccessMethodsMixin(object):
         Deletes a public discount.
 
         """
-        
+
         return self.delete("/events/{0}/public_discounts/{1}/".format(id,discount_id), data=data)
 
     def get_event_access_codes(self, id, **data):
@@ -224,7 +224,7 @@ class AccessMethodsMixin(object):
         on this event.
 
         """
-        
+
         return self.get("/events/{0}/access_codes/".format(id), data=data)
 
     def post_event_access_codes(self, id, **data):
@@ -234,7 +234,7 @@ class AccessMethodsMixin(object):
         key ``access_code``.
 
         """
-        
+
         return self.post("/events/{0}/access_codes/".format(id), data=data)
 
     def get_event_access_code(self, id, access_code_id, **data):
@@ -243,7 +243,7 @@ class AccessMethodsMixin(object):
         Gets a :format:`access_code` by ID as the key ``access_code``.
 
         """
-        
+
         return self.get("/events/{0}/access_codes/{1}/".format(id,access_code_id), data=data)
 
     def post_event_access_code(self, id, access_code_id, **data):
@@ -253,7 +253,7 @@ class AccessMethodsMixin(object):
         key ``access_code``.
 
         """
-        
+
         return self.post("/events/{0}/access_codes/{1}/".format(id,access_code_id), data=data)
 
     def get_event_transfers(self, id, **data):
@@ -261,7 +261,7 @@ class AccessMethodsMixin(object):
         GET /events/:id/transfers/
         Returns a list of :format:`transfers` for the event.
         """
-        
+
         return self.get("/events/{0}/transfers/".format(id), data=data)
 
     def get_media(self, id, **data):
@@ -271,7 +271,7 @@ class AccessMethodsMixin(object):
         .. _get-media-upload:
 
         """
-        
+
         return self.get("/media/{0}/".format(id), data=data)
 
     def get_media_upload(self, **data):
@@ -295,7 +295,7 @@ class AccessMethodsMixin(object):
         GET /orders/:id/
         Gets an :format:`order` by ID as the key ``order``.
         """
-        
+
         return self.get("/orders/{0}/".format(id), data=data)
 
     def post_organizers(self, **data):
@@ -316,7 +316,7 @@ class AccessMethodsMixin(object):
         Gets an :format:`organizer` by ID as ``organizer``.
 
         """
-        
+
         return self.get("/organizers/{0}/".format(id), data=data)
 
     def post_organizers(self, id, **data):
@@ -325,7 +325,7 @@ class AccessMethodsMixin(object):
 
         Updates an :format:`organizer` and returns it as as ``organizer``.
         """
-        
+
         return self.post("/organizers/{0}/".format(id), data=data)
 
     def get_organizer_events(self, id, **data):
@@ -354,7 +354,7 @@ class AccessMethodsMixin(object):
         to get details about the currently authenticated user, use ``/users/me/``.
 
         """
-        
+
         return self.get("/users/{0}/".format(id), data=data)
 
     def get_user_orders(self, id, **data):
@@ -368,7 +368,7 @@ class AccessMethodsMixin(object):
         .. note:: A datetime represented as a string in ISO8601 combined date and time format, always in UTC.
 
         """
-        
+
         return self.get("/users/{0}/orders/".format(id), data=data)
 
     def get_user_owned_events(self, id, **data):
@@ -378,7 +378,7 @@ class AccessMethodsMixin(object):
         the key ``events``, of all events the user owns (i.e. events they are organising)
 
         """
-        
+
         return self.get("/users/{0}/owned_events/".format(id), data=data)
 
     def get_user_events(self, id, **data):
@@ -419,7 +419,7 @@ class AccessMethodsMixin(object):
         (events that would be returned from ``/users/:id/owned_events/``)
 
         """
-        
+
         return self.get("/users/{0}/owned_event_attendees/".format(id), data=data)
 
     def get_user_owned_event_orders(self, id, **data):
@@ -430,7 +430,7 @@ class AccessMethodsMixin(object):
         (events that would be returned from ``/users/:id/owned_events/``)
 
         """
-        
+
         return self.get("/users/{0}/owned_event_orders/".format(id), data=data)
 
     def get_user_contact_lists(self, id, **data):
@@ -440,7 +440,7 @@ class AccessMethodsMixin(object):
         ``contact_lists``.
 
         """
-        
+
         return self.get("/users/{0}/contact_lists/".format(id), data=data)
 
     def post_user_contact_lists(self, id, **data):
@@ -450,7 +450,7 @@ class AccessMethodsMixin(object):
         ``contact_list``.
 
         """
-        
+
         return self.post("/users/{0}/contact_lists/".format(id), data=data)
 
     def get_user_contact_list(self, id, contact_list_id, **data):
@@ -459,7 +459,7 @@ class AccessMethodsMixin(object):
         Gets a user's :format:`contact_list` by ID as ``contact_list``.
 
         """
-        
+
         return self.get("/users/{0}/contact_lists/{1}/".format(id,contact_list_id), data=data)
 
     def post_user_contact_list(self, id, contact_list_id, **data):
@@ -468,7 +468,7 @@ class AccessMethodsMixin(object):
         Updates the :format:`contact_list` and returns it as ``contact_list``.
 
         """
-        
+
         return self.post("/users/{0}/contact_lists/{1}/".format(id,contact_list_id), data=data)
 
     def delete_user_contact_list(self, id, contact_list_id, **data):
@@ -477,7 +477,7 @@ class AccessMethodsMixin(object):
         Deletes the contact list. Returns ``{"deleted": true}``.
 
         """
-        
+
         return self.delete("/users/{0}/contact_lists/{1}/".format(id,contact_list_id), data=data)
 
     def get_user_contact_lists_contacts(self, id, contact_list_id, **data):
@@ -487,7 +487,7 @@ class AccessMethodsMixin(object):
         as ``contacts``.
 
         """
-        
+
         return self.get("/users/{0}/contact_lists/{1}/contacts/".format(id,contact_list_id), data=data)
 
     def post_user_contact_lists_contacts(self, id, contact_list_id, **data):
@@ -498,7 +498,7 @@ class AccessMethodsMixin(object):
         and add the updated version.
 
         """
-        
+
         return self.post("/users/{0}/contact_lists/{1}/contacts/".format(id,contact_list_id), data=data)
 
     def delete_user_contact_lists_contacts(self, id, contact_list_id, **data):
@@ -508,7 +508,7 @@ class AccessMethodsMixin(object):
         Returns ``{"deleted": true}``.
 
         """
-        
+
         return self.delete("/users/{0}/contact_lists/{1}/contacts/".format(id,contact_list_id), data=data)
 
     def get_webhook(self, id, **data):
@@ -517,7 +517,7 @@ class AccessMethodsMixin(object):
         Returns a :format:`webhook` for the specified webhook as ``webhook``.
 
         """
-        
+
         return self.get("/webhooks/{0}/".format(id), data=data)
 
     def delete_webhook(self, id, **data):
@@ -526,7 +526,7 @@ class AccessMethodsMixin(object):
         Deletes the specified :format:`webhook` object.
 
         """
-        
+
         return self.delete("/webhooks/{0}/".format(id), data=data)
 
     def get_webhooks(self, **data):
