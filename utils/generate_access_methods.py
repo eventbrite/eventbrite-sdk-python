@@ -133,8 +133,7 @@ def get_method_name_from_row(row):
         row = row.replace("organizers", "organizers")
         row = row.replace("users", "user")
         row = row.replace("webhooks", "webhook")
-    else:
-        row = row.replace("format", "formats")
+        row = row.replace("formats", "format")
     elements = row.split('/')
     prefix = elements[0].strip().lower()
     method_pieces = [x.strip() for x in elements[1:] if not x.startswith(':')]
