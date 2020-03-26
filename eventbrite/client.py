@@ -104,7 +104,7 @@ class Eventbrite(AccessMethodsMixin):
             return self.get('/users/{0}/'.format(user_id))
         return self.get('/users/me/')
 
-    def get_user_orders(self, user_id=None, changed_since=None):
+    def get_user_orders(self, user_id=None, changed_since=None, page=None):
         """
         Returns a paginated response of orders, under the key orders, of all
         orders the user has placed (i.e. where the user was the person buying
@@ -116,6 +116,8 @@ class Eventbrite(AccessMethodsMixin):
             to get current user.
         :param datetime changed_since: (optional) Only return attendees changed
             on or after the time given
+        :param int page: (optional) Since the response is paginated then this
+            allows you to specify which page to fetch.
 
         .. note:: A datetime represented as a string in ISO8601 combined date
             and time format, always in UTC.
@@ -128,20 +130,33 @@ class Eventbrite(AccessMethodsMixin):
         data = {}
         if changed_since:
             data['changed_since'] = changed_since
+        if page:
+            data['page'] = page
         return self.get(url, data=data)
 
-    def get_event_attendees(self, event_id, status=None, changed_since=None):
+    def get_event_attendees(self, event_id, status=None, changed_since=None, page=None):
         """
         Returns a paginated response with a key of attendees, containing a
         list of attendee.
 
         GET /events/:id/attendees/
+
+        :param status: (optional)
+        :param datetime changed_since: (optional) Only return attendees changed
+            on or after the time given
+        :param int page: (optional) Since the response is paginated then this
+            allows you to specify which page to fetch.
+
+        .. note:: A datetime represented as a string in ISO8601 combined date
+            and time format, always in UTC.
         """
         data = {}
         if status:  # TODO - check the types of valid status
             data['status'] = status
         if changed_since:
             data['changed_since'] = changed_since
+        if page:
+            data['page'] = page
         return self.get("/events/{0}/attendees/".format(event_id), data=data)
 
     def get_event_attendee_by_id(self, event_id, attendee_id):
@@ -150,14 +165,20 @@ class Eventbrite(AccessMethodsMixin):
         """
         return self.get("/events/{0}/attendees/{1}/".format(event_id, attendee_id))
 
-    def get_event_ticket_classes(self, event_id):
+    def get_event_ticket_classes(self, event_id, page=None):
         """
         Returns a paginated response with a key of ticket_classes, containing
         a list of ticket_class.
 
         GET /events/:id/ticket_classes/
+
+        :param int page: (optional) Since the response is paginated then this
+            allows you to specify which page to fetch.
         """
-        return self.get("/events/{0}/ticket_classes/".format(event_id))
+        data = {}
+        if page:
+            data['page'] = page
+        return self.get("/events/{0}/ticket_classes/".format(event_id), data=data)
 
     def get_event_ticket_class_by_id(self, event_id, ticket_class_id):
         """
@@ -165,13 +186,19 @@ class Eventbrite(AccessMethodsMixin):
         """
         return self.get("/events/{0}/ticket_classes/{1}/".format(event_id, ticket_class_id))
 
-    def get_event_discounts(self, event_id):
+    def get_event_discounts(self, event_id, page=None):
         """
         Returns a paginated response with a key of discounts, containing a list of discount.
 
         GET /events/:id/discounts/
+
+        :param int page: (optional) Since the response is paginated then this
+            allows you to specify which page to fetch.
         """
-        return self.get("/events/{0}/discounts/".format(event_id))
+        data = {}
+        if page:
+            data['page'] = page
+        return self.get("/events/{0}/discounts/".format(event_id), data=data)
 
     def post_event_discount(
             self, event_id,
