@@ -90,6 +90,21 @@ class Eventbrite(AccessMethodsMixin):
     # Access methods
     #
     ############################
+    def get_user_organizations(self, id, **data):
+        """
+        GET /organizers/:id/
+        Gets an :format:`organizer` by ID as ``organizer``.
+
+        """
+
+        return self.get("/users/{0}/organizations".format(id), data=data)
+
+    def get_organization_events(self, id, **data):
+        return self.get("/organizations/{0}/events".format(id), data=data)
+
+    def get_organization_venues(self, id, **data):
+        return self.get("/organizations/{0}/venues".format(id), data=data)
+
 
     def get_user(self, user_id=None):
         """

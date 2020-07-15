@@ -319,6 +319,9 @@ class AccessMethodsMixin(object):
 
         return self.get("/organizers/{0}/".format(id), data=data)
 
+    def get_organization_organizers(self, id, **data):
+        return self.get("/organization/{0}/organizers".format(id), data=data)
+
     def post_organizers(self, id, **data):
         """
         POST /organizers/:id/
