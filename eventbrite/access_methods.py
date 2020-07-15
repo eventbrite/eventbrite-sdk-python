@@ -320,7 +320,7 @@ class AccessMethodsMixin(object):
         return self.get("/organizers/{0}/".format(id), data=data)
 
     def get_organization_organizers(self, id, **data):
-        return self.get("/organization/{0}/organizers".format(id), data=data)
+        return self.get("/organizations/{0}/organizers".format(id), data=data)
 
     def post_organizers(self, id, **data):
         """
@@ -330,6 +330,13 @@ class AccessMethodsMixin(object):
         """
 
         return self.post("/organizers/{0}/".format(id), data=data)
+
+
+    def get_organization_events(self, id, **data):
+        return self.get("/organizations/{0}/events".format(id), data=data)
+
+    def get_organization_venues(self, id, **data):
+        return self.get("/organizations/{0}/venues".format(id), data=data)
 
     def get_organizer_events(self, id, **data):
         """
