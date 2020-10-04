@@ -104,6 +104,18 @@ class Eventbrite(AccessMethodsMixin):
             return self.get('/users/{0}/'.format(user_id))
         return self.get('/users/me/')
 
+    def get_user_organizations(self, user_id=None):
+        """
+        Returns a paginated response of all organizations to which the user
+        belongs
+
+        GET users/:id/organizations
+
+        :param int user_id: (optional) The id assigned to a user
+
+        """
+        return self.get('/users/{0}/organizations/'.format(user_id or 'me'))
+
     def get_user_orders(self, user_id=None, changed_since=None):
         """
         Returns a paginated response of orders, under the key orders, of all
