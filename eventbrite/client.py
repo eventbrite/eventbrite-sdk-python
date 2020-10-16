@@ -51,7 +51,7 @@ class Eventbrite(AccessMethodsMixin):
         return method(path, data)
 
     @objectify
-    def get(self, path, data=None, expand=()):
+    def get(self, path, data=None, expand=(), timeout=None):
         # Resolves the search result response problem
         headers = self.headers
         if 'content-type' in headers:
@@ -72,7 +72,7 @@ class Eventbrite(AccessMethodsMixin):
         else:
             # Anything else is None
             data['expand'] = 'none'
-        return requests.get(path, headers=headers, params=data or {})
+        return requests.get(path, headers=headers, params=data or {}, timeout=timeout)
 
     @objectify
     def post(self, path, data=None):
